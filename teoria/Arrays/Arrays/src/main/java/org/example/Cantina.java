@@ -14,7 +14,6 @@ public class Cantina {
             }
         }
     }
-
     void mostrarInfo(){
         for (int i = 0; i < salgado.length ; i++) {
             System.out.println("Salgado "+(i+1)+ ": "+ salgado[i].nome);
