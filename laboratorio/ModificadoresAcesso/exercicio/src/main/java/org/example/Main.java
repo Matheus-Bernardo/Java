@@ -21,13 +21,17 @@ public class Main {
         clientes[0]=cliente1;
         clientes[1]=cliente2;
 
+        for (int i = 0; i < conta1.length ; i++) {
+            conta1[i] = new Conta();
+        }
+        
         conta1[0].setClientes(cliente1);
         conta1[0].deposita(1500);
         conta1[0].saca(200);
         conta1[0].extrato();
 
         conta1[1].setClientes(cliente2);
-        conta1[1].deposita(1500);
+        conta1[1].deposita(800);
         conta1[1].saca(200);
         conta1[1].extrato();
 
