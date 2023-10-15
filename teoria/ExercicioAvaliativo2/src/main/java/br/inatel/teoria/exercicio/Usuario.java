@@ -11,13 +11,24 @@ public class Usuario {
     RedeSocial[] redesSociaisUsuarios = new RedeSocial[2];
 
     //Ao criar um usuario juntamente cria uma rede social
-    public Usuario(RedeSocial redeSociais,RedeSocial redeSociais2) {
-        //verificação pré acréscimo de redeSocial ao usuario
+    public Usuario(RedeSocial[]  redeSociais) {
+         redesSociaisUsuarios = redeSociais;
+
+    }
+
+    public void mostrarInfos(){
         for (int i = 0; i < redesSociaisUsuarios.length ; i++) {
-            if (redesSociaisUsuarios[i] == null){
-                redesSociaisUsuarios[i] = redeSociais;
-                redesSociaisUsuarios[i+1] = redeSociais2;
-                break;
+            if (redesSociaisUsuarios[i] instanceof Facebook ){
+                //caso a rede social seja Facebook
+                Facebook auxFB = (Facebook) redesSociaisUsuarios[i];
+                auxFB.compartilhar();
+                auxFB.curtirPublicacao();
+                auxFB.fazStreaming();
+            } else if (redesSociaisUsuarios[i] instanceof  Instagram) {
+                Instagram auxInstagram = (Instagram) redesSociaisUsuarios[i];
+                auxInstagram.postarVideo();
+                auxInstagram.postarComentario();
+                auxInstagram.postarFoto();
             }
         }
     }

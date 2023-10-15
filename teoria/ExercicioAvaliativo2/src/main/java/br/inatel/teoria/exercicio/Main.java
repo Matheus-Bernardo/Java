@@ -6,6 +6,9 @@ public class Main {
 
     public static void main(String[] args) {
 
+        //vetor auxiliar de rede social
+        RedeSocial[] redeSociais = new RedeSocial[2];
+
         //instanciando duas redes Sociais Para o usuario 1
         //criando(Instanciando) facebook
         Facebook fbUser1 = new Facebook();
@@ -17,15 +20,21 @@ public class Main {
         instaUser1.setSenha("123Senha");
         instaUser1.setNumAmigos(15);
 
+        redeSociais[0] = fbUser1;
+        redeSociais[1] = instaUser1;
 
-        //printando informações
-        Usuario user1 = new Usuario(fbUser1,instaUser1);
-        user1.redesSociaisUsuarios[0].curtirPublicacao();
-        user1.redesSociaisUsuarios[0].postarFoto();
-        user1.redesSociaisUsuarios[0].postarVideo();
 
-        user1.redesSociaisUsuarios[1].postarVideo();
-        user1.redesSociaisUsuarios[1].curtirPublicacao();
+        //criando usuario com as redes sociais
+        Usuario user1 = new Usuario(redeSociais);
+        user1.setEmail("matheus@inatel.br");
+        user1.setNome("Matheus");
+
+
+        user1.mostrarInfos();
+
+
+
+
 
 
 
