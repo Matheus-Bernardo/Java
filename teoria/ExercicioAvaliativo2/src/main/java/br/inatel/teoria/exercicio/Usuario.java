@@ -12,8 +12,13 @@ public class Usuario {
 
     //Ao criar um usuario juntamente cria uma rede social
     public Usuario(RedeSocial[]  redeSociais) {
-         redesSociaisUsuarios = redeSociais;
-
+        //verificação se vetor de redesSociaisUsuarios está vazio para receber o parametro
+        for (int i = 0; i < redesSociaisUsuarios.length; i++) {
+            if (redesSociaisUsuarios[i] == null){
+                redesSociaisUsuarios[i] = redeSociais[i];
+                break;
+            }
+        }
     }
 
     public void mostrarInfos(){
