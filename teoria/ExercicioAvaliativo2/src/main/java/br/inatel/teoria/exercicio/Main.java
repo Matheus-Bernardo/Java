@@ -20,6 +20,7 @@ public class Main {
         instaUser1.setSenha("123Senha");
         instaUser1.setNumAmigos(15);
 
+        //alocando as redes sociais que serão do user 1 no vetor auxliar
         redeSociais[0] = fbUser1;
         redeSociais[1] = instaUser1;
 
@@ -29,22 +30,9 @@ public class Main {
         user1.setEmail("matheus@inatel.br");
         user1.setNome("Matheus");
 
-
+        //mostra os métodos de cada uma das redes sociais do usuario
         user1.mostrarInfos();
 
-
-
-
-
-
-
-
-
-
-
-
-
     }
-
 
 }

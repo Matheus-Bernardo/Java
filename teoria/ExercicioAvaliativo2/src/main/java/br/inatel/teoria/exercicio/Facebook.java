@@ -4,13 +4,12 @@ public class Facebook extends RedeSocial implements Compartilhamento,VideoConfer
 
 
 
-    //métodos reescritos
+    //métodos reescritos da classe mãe/interface
     @Override
-    public void compartilhar() { System.out.println("Compartilhando publicação no facebook");}
+    public void compartilhar() { System.out.println("Compartilhando publicação no facebook");}//método da interface
     @Override
     public void fazStreaming() {
-        System.out.println("realizou uma vídeo conferência no Facebook");
-    }
+        System.out.println("realizou uma vídeo conferência no Facebook");}//método da interface
     @Override
     public void postarFoto() {
         System.out.println("Postou foto no Facebook");

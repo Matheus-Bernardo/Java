@@ -3,8 +3,9 @@ import java.util.ArrayList;
 
 public class Usuario {
 
-    private String nome;
-    private String email;
+    //atributos do Usuario
+    private String nome;//nome do usuario
+    private String email;//email do usuario
 
 
     //lista de redes sociais do usuario
@@ -21,6 +22,7 @@ public class Usuario {
         }
     }
 
+    //vetor auxiliar para mostrar as redes sociais que o user possuí
     public void mostrarInfos(){
         for (int i = 0; i < redesSociaisUsuarios.length ; i++) {
             if (redesSociaisUsuarios[i] instanceof Facebook ){
