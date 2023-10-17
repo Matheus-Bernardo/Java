@@ -17,13 +17,16 @@ public class Usuario {
         for (int i = 0; i < redesSociaisUsuarios.length; i++) {
             if (redesSociaisUsuarios[i] == null){
                 redesSociaisUsuarios[i] = redeSociais[i];
-                break;
+
             }
         }
     }
 
     //vetor auxiliar para mostrar as redes sociais que o user possuí
     public void mostrarInfos(){
+
+        System.out.println("Usuario ativo:" + getNome());
+
         for (int i = 0; i < redesSociaisUsuarios.length ; i++) {
             if (redesSociaisUsuarios[i] instanceof Facebook ){
                 //caso a rede social seja Facebook
@@ -36,6 +39,16 @@ public class Usuario {
                 auxInstagram.postarVideo();
                 auxInstagram.postarComentario();
                 auxInstagram.postarFoto();
+            } else if (redesSociaisUsuarios[i] instanceof  GooglePlus) {
+                GooglePlus auxGoogle = (GooglePlus) redesSociaisUsuarios[i];
+                auxGoogle.compartilhar();
+                auxGoogle.fazStreaming();
+                auxGoogle.postarComentario();
+            } else if (redesSociaisUsuarios[i] instanceof  Twitter) {
+               Twitter auxTw = (Twitter) redesSociaisUsuarios[i];
+               auxTw.postarVideo();
+               auxTw.curtirPublicacao();
+               auxTw.curtirPublicacao();
             }
         }
     }
