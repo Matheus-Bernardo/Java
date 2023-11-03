@@ -1,3 +1,7 @@
+import br.inatel.trabalho.Locadora.DAO.ClienteDao;
+import br.inatel.trabalho.Locadora.Models.Cliente;
+
+import javax.sound.midi.Soundbank;
 import java.util.Scanner;
 
 public class Main {
@@ -22,7 +26,35 @@ public class Main {
 
             switch (opcao){
                 case 1:
-                    System.out.println("cadastrando cliente");
+
+                    //dados dos clientes
+                    System.out.println("Nome do cliente:");
+                    String nome = entradaDados.nextLine();
+                    entradaDados.nextLine();
+
+                    System.out.println("cpf do cliente:");
+                    String cpf = entradaDados.nextLine();
+
+                    System.out.println("endereço do cliente:");
+                    String endereco = entradaDados.nextLine();
+
+                    System.out.println("telefone do cliente:");
+                    String telefone = entradaDados.nextLine();
+
+                    System.out.println("email do cliente:");
+                    String email = entradaDados.nextLine();
+
+                    Cliente cliente = new Cliente(cpf,nome,endereco,telefone,email);
+
+
+                    //inserindo cliente no banco
+                    ClienteDao novoCliente = new ClienteDao();
+
+                    novoCliente.insertCliente(cliente);
+
+
+
+
                     break;
                 case 2:
                     System.out.println("filme novo cadastrado");
