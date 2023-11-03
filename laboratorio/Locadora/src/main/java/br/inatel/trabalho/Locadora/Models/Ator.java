@@ -4,8 +4,6 @@ public class Ator {
     private int idAtor;
     private String nomeAtor;
 
-
-
     //getter e setters
 
     public int getIdAtor() {
