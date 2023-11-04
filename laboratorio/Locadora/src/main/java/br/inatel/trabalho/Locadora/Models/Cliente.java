@@ -9,8 +9,6 @@ public class Cliente {
     private String email;
 
     //construtor
-
-
     public Cliente(String cpf, String nome, String endereco, String telefone, String email) {
         this.cpf = cpf;
         this.nome = nome;
@@ -18,26 +16,12 @@ public class Cliente {
         this.telefone = telefone;
         this.email = email;
     }
-
     //getters
-    public String getCpf() {
-        return cpf;
-    }
-    public String getNome() {
-        return nome;
-    }
-
-    public String getEndereco() {
-        return endereco;
-    }
-
-    public String getTelefone() {
-        return telefone;
-    }
-
-    public String getEmail() {
-        return email;
-    }
+    public String getCpf() {return this.cpf;}
+    public String getNome() {return this.nome;}
+    public String getEndereco() {return this.endereco;}
+    public String getTelefone() {return this.telefone;}
+    public String getEmail() {return this.email;}
 
 
 }
