@@ -6,15 +6,14 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
+        Scanner entradaDados = new Scanner(System.in);//Entrada de dados
 
-        //Entrada de dados
-        Scanner entradaDados = new Scanner(System.in);
-        //variavel de controle do menu
-        boolean controle = true;
+        boolean controle = true;//variavel de controle do menu
 
         //inicio do Menu
         while(controle){
 
+            //menu Inicial
             System.out.println("Bem vindo a locadora");
             System.out.println("1- Cadastrar novo Cliente");
             System.out.println("2- Cadastrar novo filme");
@@ -23,14 +22,14 @@ public class Main {
 
             System.out.println("Informe a opção escolhida");
             int opcao = entradaDados.nextInt();
+            entradaDados.nextLine();
 
             switch (opcao){
                 case 1:
-
                     //dados dos clientes
                     System.out.println("Nome do cliente:");
                     String nome = entradaDados.nextLine();
-                    entradaDados.nextLine();
+                    //entradaDados.nextLine();
 
                     System.out.println("cpf do cliente:");
                     String cpf = entradaDados.nextLine();
@@ -44,16 +43,12 @@ public class Main {
                     System.out.println("email do cliente:");
                     String email = entradaDados.nextLine();
 
-                    Cliente cliente = new Cliente(cpf,nome,endereco,telefone,email);
-
+                    //criando um cliente a ser inserido no banco
+                    Cliente cliente = new Cliente(cpf,nome,endereco,telefone,email);//cria novo cliente
 
                     //inserindo cliente no banco
                     ClienteDao novoCliente = new ClienteDao();
-
                     novoCliente.insertCliente(cliente);
-
-
-
 
                     break;
                 case 2:
