@@ -10,7 +10,7 @@ public class ClienteDao extends ConnectionDAO {
         //abrir conexão com o banco
         conectaNoBanco();
 
-        String sql = "INSERT INTO cliente(cpf,nome,endereco,telefone,email) values (?,?,?,?,?)";
+        String sql = "INSERT INTO cliente(CPF,nome,endereco,telefone,email) values (?,?,?,?,?)";
 
         //parametros a serem inseridos no Banco de dados
 
@@ -24,6 +24,8 @@ public class ClienteDao extends ConnectionDAO {
 
             pst.execute();
             sucesso = true;
+
+            System.out.println("Cliente "+ cliente.getNome() + " cadastrado.");
 
         }catch (SQLException exc){
             System.out.println("Erro: " + exc);
