@@ -1,6 +1,8 @@
 import br.inatel.trabalho.Locadora.DAO.ClienteDao;
+import br.inatel.trabalho.Locadora.DAO.DvdDAO;
 import br.inatel.trabalho.Locadora.DAO.FilmeDAO;
 import br.inatel.trabalho.Locadora.Models.Cliente;
+import br.inatel.trabalho.Locadora.Models.Dvd;
 import br.inatel.trabalho.Locadora.Models.Filme;
 
 import java.util.Scanner;
@@ -17,7 +19,7 @@ public class Main {
             //menu Inicial
             System.out.println("Bem vindo a locadora");
             System.out.println("1- Cadastrar novo Cliente");
-            System.out.println("2- Cadastrar novo filme");
+            System.out.println("2- Adicionar filme ao catálogo da Locadora");
             System.out.println("3- Alugar filme");
             System.out.println("4- Sair");
 
@@ -75,7 +77,21 @@ public class Main {
 
                     break;
                 case 3:
-                    System.out.println("filme alugado");
+
+                    System.out.println("Entre com o ID único do DVD:");
+                    int idDvd = entradaDados.nextInt();
+                    entradaDados.nextLine();
+
+                    System.out.println("Entre com o ID do filme que você deseja gravar no DVD:");
+                    int idFilmeDvd = entradaDados.nextInt();
+
+                    //grava um novo filme no dvd
+                    Dvd novoDvd = new Dvd(idDvd,idFilmeDvd);
+
+                    //insere novo Dvd no banco
+                    DvdDAO filmeGravadoDvd = new DvdDAO();
+                    filmeGravadoDvd.insertFilmeNoDvd(novoDvd);
+
                     break;
                 case 4:
                     System.out.println("Saindo");
