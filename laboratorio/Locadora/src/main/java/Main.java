@@ -55,7 +55,6 @@ public class Main {
 
                     break;
                 case 2:
-                    System.out.println("filme novo cadastrado");
                     //dados dos filmes
                     System.out.println("Entre com o ID único do filme: ");
                     int idFilme=entradaDados.nextInt();
