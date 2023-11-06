@@ -6,8 +6,13 @@ public class Fillme {
     private String nomeFilme;
     private String dataLancamento;
 
-    //getters e setters
+    public Fillme(int idFillme, String nomeFilme, String dataLancamento) {
+        this.idFillme = idFillme;
+        this.nomeFilme = nomeFilme;
+        this.dataLancamento = dataLancamento;
+    }
 
+    //getters e setters
     public int getIdFillme() {
         return idFillme;
     }
