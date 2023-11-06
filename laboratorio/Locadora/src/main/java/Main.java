@@ -1,7 +1,8 @@
 import br.inatel.trabalho.Locadora.DAO.ClienteDao;
+import br.inatel.trabalho.Locadora.DAO.FilmeDAO;
 import br.inatel.trabalho.Locadora.Models.Cliente;
+import br.inatel.trabalho.Locadora.Models.Filme;
 
-import javax.sound.midi.Soundbank;
 import java.util.Scanner;
 
 public class Main {
@@ -53,6 +54,25 @@ public class Main {
                     break;
                 case 2:
                     System.out.println("filme novo cadastrado");
+                    //dados dos filmes
+                    System.out.println("Entre com o ID único do filme: ");
+                    int idFilme=entradaDados.nextInt();
+                    entradaDados.nextLine();
+
+                    System.out.println("Entre com o nome do Filme:");
+                    String nomeFilme = entradaDados.nextLine();
+
+                    System.out.println("Informe a data de lançamento: ");
+                    String dataLancamento = entradaDados.nextLine();
+
+                    //cria novo filme
+                    Filme filme = new Filme(idFilme,nomeFilme,dataLancamento);
+
+                    //inserindo filme no banco
+                    FilmeDAO novoFilme = new FilmeDAO();
+                    novoFilme.insertFilme(filme);
+
+
                     break;
                 case 3:
                     System.out.println("filme alugado");
