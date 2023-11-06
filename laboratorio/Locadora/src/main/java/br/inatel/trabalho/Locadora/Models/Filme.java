@@ -1,12 +1,12 @@
 package br.inatel.trabalho.Locadora.Models;
 
-public class Fillme {
+public class Filme {
     //atributos da classe filme
     private int idFillme;
     private String nomeFilme;
     private String dataLancamento;
 
-    public Fillme(int idFillme, String nomeFilme, String dataLancamento) {
+    public Filme(int idFillme, String nomeFilme, String dataLancamento) {
         this.idFillme = idFillme;
         this.nomeFilme = nomeFilme;
         this.dataLancamento = dataLancamento;
