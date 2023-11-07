@@ -1,5 +1,6 @@
 import br.inatel.prova3.treino.AnoVeiculoException;
 import br.inatel.prova3.treino.Arquivo;
+import br.inatel.prova3.treino.MarcasException;
 import br.inatel.prova3.treino.Veiculo;
 
 import java.io.IOException;
@@ -31,8 +32,18 @@ public class Main {
 
             switch (opcao){
                 case 1:
-                    System.out.println("Entre com a marca do carro:");
-                    veiculo.setMarca(entradaDeDados.nextLine());
+
+                    try {
+                        System.out.println("Entre com a marca do carro:");
+                        veiculo.setMarca(entradaDeDados.nextLine());
+
+                        if (!veiculo.getMarca().equalsIgnoreCase("Rolls-Royce") && !veiculo.getMarca().equalsIgnoreCase("Bentley")){
+                            throw new MarcasException();
+                        }
+                    }catch (Exception e){
+                        break;
+                    };
+
 
                     System.out.println("Entre com a modelo do carro:");
                     veiculo.setModelo(entradaDeDados.nextLine());
