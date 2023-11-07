@@ -1,8 +1,4 @@
-import br.inatel.prova3.treino.AnoVeiculoException;
-import br.inatel.prova3.treino.Arquivo;
-import br.inatel.prova3.treino.MarcasException;
-import br.inatel.prova3.treino.Veiculo;
-
+import br.inatel.prova3.treino.*;
 import java.io.IOException;
 import java.util.Scanner;
 
@@ -38,7 +34,7 @@ public class Main {
                         veiculo.setMarca(entradaDeDados.nextLine());
 
                         if (!veiculo.getMarca().equalsIgnoreCase("Rolls-Royce") && !veiculo.getMarca().equalsIgnoreCase("Bentley")){
-                            throw new MarcasException();
+                            throw new ValorInvalidoException("Marca invalida, aceitamos somente Rolls-Royce e Bentley ");
                         }
                     }catch (Exception e){
                         break;
@@ -53,7 +49,7 @@ public class Main {
                         veiculo.setAno(entradaDeDados.nextInt());
                         entradaDeDados.nextLine();
                         if (veiculo.getAno() < 1960 || veiculo.getAno()>2024){
-                            throw new AnoVeiculoException();
+                            throw new ValorInvalidoException("O carro tem que ser fabricado entre 1960 e 2024");
                         }
                     }catch (Exception e){
                         break;
@@ -64,11 +60,34 @@ public class Main {
                         veiculo.setKmsRodados(entradaDeDados.nextDouble());
                         entradaDeDados.nextLine();
                         if (veiculo.getKmsRodados() <= 0 ){
-                            throw new AnoVeiculoException();
+                            throw new ValorInvalidoException("O veiculo não pode ter 0 quilometros rodados");
                         }
                     }catch (Exception e){
                         break;
                     };
+
+                    try {
+                        System.out.println("Entre com o numero de cilindros do carro:");
+                        veiculo.getMotor().setNumCilindros(entradaDeDados.nextInt());
+                        entradaDeDados.nextLine();
+                        if (veiculo.getMotor().getNumCilindros() <= 0){
+                            throw new ValorInvalidoException("o veiculo deve possuir pelo menos 1 cilindro");
+                        }
+                    }catch (Exception e){
+                        break;
+                    };
+
+                    try {
+                        System.out.println("Entre com a potencia do motor do carro:");
+                        veiculo.getMotor().setPotencia(entradaDeDados.nextDouble());
+                        entradaDeDados.nextLine();
+                        if (veiculo.getMotor().getPotencia() <= 0){
+                            throw new ValorInvalidoException("O veiculo deve conter pelo menos 1 de potencia");
+                        }
+                    }catch (Exception e){
+                        break;
+                    };
+
 
                     arq.escrever(veiculo);
                     break;

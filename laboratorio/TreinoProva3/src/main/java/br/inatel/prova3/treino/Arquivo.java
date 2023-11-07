@@ -23,6 +23,10 @@ public class Arquivo {
             bw.write(veiculo.getModelo()+ "\n");
             bw.write(veiculo.getAno()+ "\n");
             bw.write(veiculo.getKmsRodados()+ "\n");
+            bw.write(veiculo.getMotor().getNumCilindros()+ "\n");
+            bw.write(veiculo.getMotor().getPotencia()+ "\n");
+
+
 
 
         }catch (Exception e){
@@ -38,7 +42,7 @@ public class Arquivo {
 
     //2.Leitura
     public ArrayList<Veiculo> ler(){
-        //Coleção que armazena todos os funcionáiros encontrados no meu arquivo
+        //Coleção que armazena todos os veiculos encontrados no meu arquivo
         ArrayList<Veiculo> veiculosEncontradosNoArquivo = new ArrayList<>();
 
         //estrutura para a leitura de dados
@@ -57,14 +61,17 @@ public class Arquivo {
             auxiliarLeitura = br.readLine();
             while (auxiliarLeitura!= null){
                 if(auxiliarLeitura.equalsIgnoreCase("+++ Veiculo +++")){
-                    //estrutura para tratas as infos do funcionário no Java
+                    //estrutura para tratas as infos do veiculo no Java
                     Veiculo auxVeiculo = new Veiculo();
                     auxVeiculo.setMarca(br.readLine());
                     auxVeiculo.setModelo(br.readLine());
                     auxVeiculo.setAno(Integer.parseInt(br.readLine()));
                     auxVeiculo.setKmsRodados(Double.parseDouble(br.readLine()));
+                    auxVeiculo.getMotor().setNumCilindros(Integer.parseInt(br.readLine()));
+                    auxVeiculo.getMotor().setPotencia(Double.parseDouble(br.readLine()));
 
-                    //adicionando o funcinario no array
+
+                    //adicionando o veiculo no array
                     veiculosEncontradosNoArquivo.add(auxVeiculo);
 
                 }
