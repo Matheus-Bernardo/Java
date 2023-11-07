@@ -1,5 +1,6 @@
 import br.inatel.prova3.treino.*;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
@@ -20,15 +21,16 @@ public class Main {
         while (controle == true){
 
             System.out.println("Bem vindo a concessionária");
-            System.out.println("1-Cadastrar novo veículo: ");
+            System.out.println("1-Cadastrar novo veículo ");
+            System.out.println("2-mostrar veículos cadastrados ");
 
             int opcao;
             opcao = entradaDeDados.nextInt();
             entradaDeDados.nextLine();
+            ArrayList<Veiculo> veiculos = arq.ler();
 
             switch (opcao){
                 case 1:
-
                     try {
                         System.out.println("Entre com a marca do carro:");
                         veiculo.setMarca(entradaDeDados.nextLine());
@@ -39,7 +41,6 @@ public class Main {
                     }catch (Exception e){
                         break;
                     };
-
 
                     System.out.println("Entre com a modelo do carro:");
                     veiculo.setModelo(entradaDeDados.nextLine());
@@ -87,11 +88,20 @@ public class Main {
                     }catch (Exception e){
                         break;
                     };
-
-
                     arq.escrever(veiculo);
                     break;
+                case 2:
+                    System.out.println("Veiculos disponiveis e suas informações");
+                    for (int i = 0; i <veiculos.size(); i++) {
+                        System.out.println("Marca: "+veiculos.get(i).getMarca());
+                        System.out.println("Modelo: "+veiculos.get(i).getModelo());
+                        System.out.println("Ano: "+veiculos.get(i).getAno());
+                        System.out.println("kms rodados: "+veiculos.get(i).getKmsRodados());
+                        System.out.println("Cilindros: "+veiculos.get(i).getMotor().getNumCilindros());
+                        System.out.println("potencia do motor: "+veiculos.get(i).getMotor().getPotencia());
+                    }
 
+                    break;
                 default:
                     break;
             }
