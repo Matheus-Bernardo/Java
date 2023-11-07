@@ -1,6 +1,7 @@
 import br.inatel.prova3.treino.*;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Scanner;
 
 public class Main {
@@ -23,6 +24,7 @@ public class Main {
             System.out.println("Bem vindo a concessionária");
             System.out.println("1-Cadastrar novo veículo ");
             System.out.println("2-mostrar veículos cadastrados ");
+            System.out.println("3- Mostrar quantidade de veiculos de cada marca");
 
             int opcao;
             opcao = entradaDeDados.nextInt();
@@ -101,6 +103,19 @@ public class Main {
                         System.out.println("potencia do motor: "+veiculos.get(i).getMotor().getPotencia());
                     }
 
+                    break;
+                case 3:
+                    // Ordenando em ordem decrescente
+                    Collections.reverse(veiculos);
+                    System.out.println("INFORMAÇÕES DOS VEÍCULOS");
+                    for (int i = 0; i < veiculos.size(); i++) {
+                        System.out.println("Marca: "+veiculos.get(i).getMarca());
+                        System.out.println("Modelo: "+veiculos.get(i).getModelo());
+                        System.out.println("Ano: "+veiculos.get(i).getAno());
+                        System.out.println("kms rodados: "+veiculos.get(i).getKmsRodados());
+                        System.out.println("Cilindros: "+veiculos.get(i).getMotor().getNumCilindros());
+                        System.out.println("potencia do motor: "+veiculos.get(i).getMotor().getPotencia());
+                    }
                     break;
                 default:
                     break;
