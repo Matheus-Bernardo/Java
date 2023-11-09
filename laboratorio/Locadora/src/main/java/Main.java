@@ -13,6 +13,9 @@ public class Main {
 
         boolean controle = true;//variavel de controle do menu
 
+        Filme filme;
+        FilmeDAO novoFilme;
+
         //inicio do Menu
         while(controle){
 
@@ -20,8 +23,9 @@ public class Main {
             System.out.println("Bem vindo a locadora");
             System.out.println("1- Cadastrar novo Cliente");
             System.out.println("2- Adicionar filme ao catálogo da Locadora");
-            System.out.println("3- Alugar filme");
-            System.out.println("4- Sair");
+            System.out.println("3- Gravar filme no Dvd");
+            System.out.println("4- Alugar um Filme");
+            System.out.println("5- Sair");
 
             System.out.println("Informe a opção escolhida");
             int opcao = entradaDados.nextInt();
@@ -67,10 +71,10 @@ public class Main {
                     String dataLancamento = entradaDados.nextLine();
 
                     //cria novo filme
-                    Filme filme = new Filme(idFilme,nomeFilme,dataLancamento);
+                    filme = new Filme(idFilme,nomeFilme,dataLancamento);
 
                     //inserindo filme no banco
-                    FilmeDAO novoFilme = new FilmeDAO();
+                    novoFilme = new FilmeDAO();
                     novoFilme.insertFilme(filme);
 
 
@@ -93,6 +97,16 @@ public class Main {
 
                     break;
                 case 4:
+
+                    System.out.println("Informe seu cpf:");
+                    cpf = entradaDados.nextLine();
+
+                    System.out.println("Abaixo está a lista de filmes disponiveis");
+                    novoFilme = new FilmeDAO();
+                    novoFilme.ListarFilmes();
+
+                    break;
+                case 5:
                     System.out.println("Saindo");
                     controle=false;
                     break;
