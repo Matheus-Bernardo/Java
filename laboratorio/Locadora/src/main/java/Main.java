@@ -17,7 +17,7 @@ public class Main {
         Filme filme;
         FilmeDAO novoFilme;
         DvdDAO filmeGravadoDvd;
-
+        ClienteDao novoCliente = new ClienteDao();
 
         //inicio do Menu
         while(controle){
@@ -57,7 +57,7 @@ public class Main {
                     Cliente cliente = new Cliente(cpf,nome,endereco,telefone,email);//cria novo cliente
 
                     //inserindo cliente no banco
-                    ClienteDao novoCliente = new ClienteDao();
+                    novoCliente = new ClienteDao();
                     novoCliente.insertCliente(cliente);
 
                     break;
@@ -104,9 +104,13 @@ public class Main {
 
                     System.out.println("Informe seu cpf:");
                     cpf = entradaDados.nextLine();
-
                     filmeGravadoDvd = new DvdDAO();
                     filmeGravadoDvd.ListarFilmes();
+
+                    System.out.println("Informe o Id do dvd que irá alugar: ");
+                    int dvdId = entradaDados.nextInt();
+                    entradaDados.nextLine();
+                    novoCliente.AlugaFilme(cpf,dvdId);
 
                     break;
                 case 5:
