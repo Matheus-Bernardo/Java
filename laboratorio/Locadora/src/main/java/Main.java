@@ -5,6 +5,7 @@ import br.inatel.trabalho.Locadora.Models.Cliente;
 import br.inatel.trabalho.Locadora.Models.Dvd;
 import br.inatel.trabalho.Locadora.Models.Filme;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
@@ -15,6 +16,8 @@ public class Main {
 
         Filme filme;
         FilmeDAO novoFilme;
+        DvdDAO filmeGravadoDvd;
+
 
         //inicio do Menu
         while(controle){
@@ -88,11 +91,12 @@ public class Main {
                     System.out.println("Entre com o ID do filme que você deseja gravar no DVD:");
                     int idFilmeDvd = entradaDados.nextInt();
 
+
                     //grava um novo filme no dvd
-                    Dvd novoDvd = new Dvd(idDvd,idFilmeDvd);
+                    Dvd novoDvd = new Dvd(idDvd,idFilmeDvd,"NULL");
 
                     //insere novo Dvd no banco
-                    DvdDAO filmeGravadoDvd = new DvdDAO();
+                    filmeGravadoDvd = new DvdDAO();
                     filmeGravadoDvd.insertFilmeNoDvd(novoDvd);
 
                     break;
@@ -101,9 +105,8 @@ public class Main {
                     System.out.println("Informe seu cpf:");
                     cpf = entradaDados.nextLine();
 
-                    System.out.println("Abaixo está a lista de filmes disponiveis");
-                    novoFilme = new FilmeDAO();
-                    novoFilme.ListarFilmes();
+                    filmeGravadoDvd = new DvdDAO();
+                    filmeGravadoDvd.ListarFilmes();
 
                     break;
                 case 5:
