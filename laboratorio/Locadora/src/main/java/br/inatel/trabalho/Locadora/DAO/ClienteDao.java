@@ -43,4 +43,43 @@ public class ClienteDao extends ConnectionDAO {
         return sucesso;
     }
 
+
+    //UPDATE
+    public void AlugaFilme(String cpfCliente, int idDvd) {
+        conectaNoBanco();
+
+        // Atualizar o campo alugado na tabela Dvd para "sim"
+        String sqlUpdateDvd = "UPDATE Locadora.Dvd SET alugado = 'sim' WHERE idDvd = ?";
+
+        // Atualizar o campo Dvd_idDvd na tabela Cliente
+        String sqlUpdateCliente = "UPDATE Locadora.Cliente SET Dvd_idDvd = ? WHERE CPF = ?";
+
+        try {
+            // Atualizar tabela Dvd
+            pst = conexao.prepareStatement(sqlUpdateDvd);
+            pst.setInt(1, idDvd);
+            pst.executeUpdate();
+
+            // Atualizar tabela Cliente
+            pst = conexao.prepareStatement(sqlUpdateCliente);
+            pst.setInt(1, idDvd);
+            pst.setString(2, cpfCliente);
+            pst.executeUpdate();
+
+            System.out.println("Filme alugado.");
+            sucesso = true;
+        } catch (SQLException e) {
+            System.out.println("Erro: " + e.getMessage());
+            sucesso = false;
+        } finally {
+            try {
+                conexao.close();
+                pst.close();
+            } catch (SQLException e) {
+                System.out.println("Erro: " + e.getMessage());
+            }
+        }
+    }
+
+
 }
