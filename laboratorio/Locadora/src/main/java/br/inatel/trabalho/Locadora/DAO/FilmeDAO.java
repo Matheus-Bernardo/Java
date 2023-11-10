@@ -44,36 +44,4 @@ public class FilmeDAO extends ConnectionDAO{
         return sucesso;
     }
 
-    //listar filmes (Select)
-    public ArrayList<Filme> ListarFilmes(){
-        ArrayList<Filme> filmes = new ArrayList<>();
-        conectaNoBanco();
-        String sql = "SELECT idFilme, nome,lancamento  FROM Locadora.Filme;";
-
-        try {
-            st = conexao.prepareStatement(sql);
-            rs = st.executeQuery(sql);
-            System.out.println("lista de filmes");
-            while (rs.next()){
-                Filme filmeaux = new Filme(rs.getInt("idFilme"), rs.getString("nome"),rs.getString("lancamento") );
-                filmes.add(filmeaux);
-                System.out.println("Id do filme: "+filmeaux.getIdFillme());
-                System.out.println("Nome do filme: "+filmeaux.getNomeFilme());
-            }
-            sucesso = true;
-
-
-        }catch (SQLException e){
-            System.out.println("Erro: "+e.getMessage());
-            sucesso= false;
-        }finally {
-            try {
-                conexao.close();
-                st.close();
-            }catch (SQLException e){
-                System.out.println("Erro: "+e.getMessage());
-            }
-        };
-        return filmes;
-    }
 }
