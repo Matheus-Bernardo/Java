@@ -3,12 +3,13 @@ package br.inatel.trabalho.Locadora.Models;
 public class Dvd {
     //atributos
     private int idDvd;
-
+    private String alugado;
     private int idFilme;
 
-    public Dvd(int idDvd, int idFilme) {
+    public Dvd(int idDvd, int idFilme , String alugado) {
         this.idDvd = idDvd;
         this.idFilme = idFilme;
+
     }
 
     //getters e setters
@@ -20,6 +21,11 @@ public class Dvd {
         return idDvd;
     }
 
+    public String getAlugado() {
+        return alugado;
+    }
 
-
+    public void setAlugado(String alugado) {
+        this.alugado = alugado;
+    }
 }
