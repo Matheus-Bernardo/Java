@@ -1,5 +1,7 @@
 package br.inatel.trabalho.Locadora.DAO;
 import br.inatel.trabalho.Locadora.Models.Ator;
+import br.inatel.trabalho.Locadora.Models.Cliente;
+
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -69,6 +71,42 @@ public class AtoresDAO extends ConnectionDAO{
             }
 
         }
+    }
+
+    public boolean inserirAtor(Ator ator){
+
+        //abrir conexão com o banco
+        conectaNoBanco();
+
+        String sql = "INSERT INTO ator(idAtor,nomeAtor) values (?,?)";
+
+        //parametros a serem inseridos no Banco de dados
+
+        try{
+            pst = conexao.prepareStatement(sql);
+            pst.setInt(1, ator.getIdAtor());
+            pst.setString(2, ator.getNomeAtor());
+
+
+            pst.execute();
+            sucesso = true;
+
+            System.out.println("Ator "+ ator.getNomeAtor() + " cadastrado.");
+
+        }catch (SQLException exc){
+            System.out.println("Erro: " + exc);
+
+        }finally {
+            try {
+                conexao.close();//termina a conexão com o banco de dados
+                pst.close();
+                System.out.println("Conexão com o banco fechada");
+            }catch (SQLException exc){
+                System.out.println("Erro: "+ exc);
+            }
+        }
+
+        return sucesso;
     }
 
 }
