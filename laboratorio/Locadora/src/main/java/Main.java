@@ -125,8 +125,7 @@ public class Main {
                     idDvd = entradaDados.nextInt();
                     entradaDados.nextLine();
 
-
-
+                    atoresdao.excluirAtor(idDvd);
 
                     break;
                 case 6:
