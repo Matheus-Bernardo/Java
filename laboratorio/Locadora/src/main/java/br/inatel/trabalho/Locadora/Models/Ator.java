@@ -4,6 +4,14 @@ public class Ator {
     private int idAtor;
     private String nomeAtor;
 
+    //construtor
+
+
+    public Ator(int idAtor, String nomeAtor) {
+        this.idAtor = idAtor;
+        this.nomeAtor = nomeAtor;
+    }
+
     //getter e setters
     public int getIdAtor() {
         return idAtor;
