@@ -2,11 +2,10 @@ import br.inatel.trabalho.Locadora.DAO.AtoresDAO;
 import br.inatel.trabalho.Locadora.DAO.ClienteDao;
 import br.inatel.trabalho.Locadora.DAO.DvdDAO;
 import br.inatel.trabalho.Locadora.DAO.FilmeDAO;
+import br.inatel.trabalho.Locadora.Models.Ator;
 import br.inatel.trabalho.Locadora.Models.Cliente;
 import br.inatel.trabalho.Locadora.Models.Dvd;
 import br.inatel.trabalho.Locadora.Models.Filme;
-
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
@@ -20,9 +19,10 @@ public class Main {
         DvdDAO filmeGravadoDvd;
         ClienteDao novoCliente = new ClienteDao();
         AtoresDAO atoresdao = new AtoresDAO();
+        Ator ator;
 
         //inicio do Menu
-        while(controle){
+        while (controle) {
 
             //menu Inicial
             System.out.println("Bem vindo a locadora");
@@ -30,14 +30,14 @@ public class Main {
             System.out.println("2- Adicionar filme ao catálogo da Locadora");
             System.out.println("3- Gravar filme no Dvd");
             System.out.println("4- Alugar um Filme");
-            System.out.println("5- remover atores ");
+            System.out.println("5- Adcionar/remover atores ");
             System.out.println("6- Sair");
 
             System.out.println("Informe a opção escolhida");
             int opcao = entradaDados.nextInt();
             entradaDados.nextLine();
 
-            switch (opcao){
+            switch (opcao) {
                 case 1:
                     //dados dos clientes
                     System.out.println("Nome do cliente:");
@@ -57,7 +57,7 @@ public class Main {
                     String email = entradaDados.nextLine();
 
                     //criando um cliente a ser inserido no banco
-                    Cliente cliente = new Cliente(cpf,nome,endereco,telefone,email);//cria novo cliente
+                    Cliente cliente = new Cliente(cpf, nome, endereco, telefone, email);//cria novo cliente
 
                     //inserindo cliente no banco
                     novoCliente = new ClienteDao();
@@ -67,7 +67,7 @@ public class Main {
                 case 2:
                     //dados dos filmes
                     System.out.println("Entre com o ID único do filme: ");
-                    int idFilme=entradaDados.nextInt();
+                    int idFilme = entradaDados.nextInt();
                     entradaDados.nextLine();
 
                     System.out.println("Entre com o nome do Filme:");
@@ -77,7 +77,7 @@ public class Main {
                     String dataLancamento = entradaDados.nextLine();
 
                     //cria novo filme
-                    filme = new Filme(idFilme,nomeFilme,dataLancamento);
+                    filme = new Filme(idFilme, nomeFilme, dataLancamento);
 
                     //inserindo filme no banco
                     novoFilme = new FilmeDAO();
@@ -96,7 +96,7 @@ public class Main {
 
 
                     //grava um novo filme no dvd
-                    Dvd novoDvd = new Dvd(idDvd,idFilmeDvd,"NULL");
+                    Dvd novoDvd = new Dvd(idDvd, idFilmeDvd, "NULL");
 
                     //insere novo Dvd no banco
                     filmeGravadoDvd = new DvdDAO();
@@ -113,30 +113,54 @@ public class Main {
                     System.out.println("Informe o Id do dvd que irá alugar: ");
                     int dvdId = entradaDados.nextInt();
                     entradaDados.nextLine();
-                    novoCliente.AlugaFilme(cpf,dvdId);
+                    novoCliente.AlugaFilme(cpf, dvdId);
 
                     break;
                 case 5:
 
-                    //Listando atores disponiveis
-                    atoresdao.listarAtores();
-
-                    System.out.println("Informe o id do Ator a ser removido");
-                    idDvd = entradaDados.nextInt();
+                    System.out.println("1 para remover / 2 para adicionar");
+                    opcao = entradaDados.nextInt();
                     entradaDados.nextLine();
 
-                    atoresdao.excluirAtor(idDvd);
+                    switch (opcao) {
+                        case 1:
+                            //Listando atores disponiveis
+                            atoresdao.listarAtores();
+
+                            System.out.println("Informe o id do Ator a ser removido");
+                            int idAtor = entradaDados.nextInt();
+                            entradaDados.nextLine();
+
+                            atoresdao.excluirAtor(idAtor);
+                            break;
+
+                        case 2:
+                            System.out.println("Informe o id do ator: ");
+                            idAtor = entradaDados.nextInt();
+                            entradaDados.nextLine();
+
+                            System.out.println("Informe o nome do Ator");
+                            String nomeAtor = entradaDados.nextLine();
+
+                            ator = new Ator(idAtor,nomeAtor);
+                            atoresdao.inserirAtor(ator);
+
+                            break;
+                        default:
+                            break;
+                    }
 
                     break;
                 case 6:
                     System.out.println("Saindo");
-                    controle=false;
+                    controle = false;
                     break;
                 default:
                     System.out.println("Opção Incorreta");
                     break;
 
             }
+
         }
     }
 }
