@@ -1,3 +1,4 @@
+import br.inatel.trabalho.Locadora.DAO.AtoresDAO;
 import br.inatel.trabalho.Locadora.DAO.ClienteDao;
 import br.inatel.trabalho.Locadora.DAO.DvdDAO;
 import br.inatel.trabalho.Locadora.DAO.FilmeDAO;
@@ -18,6 +19,7 @@ public class Main {
         FilmeDAO novoFilme;
         DvdDAO filmeGravadoDvd;
         ClienteDao novoCliente = new ClienteDao();
+        AtoresDAO atoresdao = new AtoresDAO();
 
         //inicio do Menu
         while(controle){
@@ -28,7 +30,8 @@ public class Main {
             System.out.println("2- Adicionar filme ao catálogo da Locadora");
             System.out.println("3- Gravar filme no Dvd");
             System.out.println("4- Alugar um Filme");
-            System.out.println("5- Sair");
+            System.out.println("5- remover atores ");
+            System.out.println("6- Sair");
 
             System.out.println("Informe a opção escolhida");
             int opcao = entradaDados.nextInt();
@@ -114,6 +117,19 @@ public class Main {
 
                     break;
                 case 5:
+
+                    //Listando atores disponiveis
+                    atoresdao.listarAtores();
+
+                    System.out.println("Informe o id do Ator a ser removido");
+                    idDvd = entradaDados.nextInt();
+                    entradaDados.nextLine();
+
+
+
+
+                    break;
+                case 6:
                     System.out.println("Saindo");
                     controle=false;
                     break;
