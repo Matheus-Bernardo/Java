@@ -1,8 +1,5 @@
 package br.inatel.trabalho.Locadora.DAO;
-
 import br.inatel.trabalho.Locadora.Models.Ator;
-import br.inatel.trabalho.Locadora.Models.Dvd;
-
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -39,6 +36,39 @@ public class AtoresDAO extends ConnectionDAO{
             }
         }
         return atores;
+    }
+
+    // Método para excluir um ator com base no ID
+    public void excluirAtor(int idAtor) {
+        conectaNoBanco();
+
+        String sql = "DELETE FROM Locadora.Ator WHERE idAtor = ?";
+
+        try {
+            pst = conexao.prepareStatement(sql);
+            pst.setInt(1, idAtor);
+            int linhasAfetadas = pst.executeUpdate();
+
+            if (linhasAfetadas > 0) {
+                System.out.println("Ator excluído com sucesso!");
+                sucesso = true;
+            } else {
+                System.out.println("Nenhum ator encontrado com o ID especificado.");
+                sucesso = false;
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Erro ao excluir o ator: " + e.getMessage());
+            sucesso = false;
+        } finally {
+            try {
+                conexao.close();
+                pst.close();
+            } catch (SQLException e) {
+                System.out.println("Erro: " + e.getMessage());
+            }
+
+        }
     }
 
 }
