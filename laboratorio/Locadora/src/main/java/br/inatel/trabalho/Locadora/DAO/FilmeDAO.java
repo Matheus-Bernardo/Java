@@ -44,4 +44,35 @@ public class FilmeDAO extends ConnectionDAO{
         return sucesso;
     }
 
+    public ArrayList<Filme> listarFilmes() {
+        ArrayList<Filme> filmes = new ArrayList<>();
+        conectaNoBanco();
+        String sql = "SELECT Filme.idFilme, Filme.nome, Filme.lancamento " +
+                "FROM Locadora.Filme";
+        try {
+            st = conexao.prepareStatement(sql);
+            rs = st.executeQuery(sql);
+            System.out.println("Lista de Filmes:");
+            while (rs.next()) {
+                Filme filmeAux = new Filme(rs.getInt("idFilme"), rs.getString("nome"),rs.getString("lancamento"));  // Ajuste conforme sua classe Filme
+                filmes.add(filmeAux);
+                System.out.println("Id do Filme: " + filmeAux.getIdFillme());
+                System.out.println("Nome do Filme: " + rs.getString("nome"));
+            }
+            sucesso = true;
+        } catch (SQLException e) {
+            System.out.println("Erro: " + e.getMessage());
+            sucesso = false;
+        } finally {
+            try {
+                conexao.close();
+                st.close();
+            } catch (SQLException e) {
+                System.out.println("Erro: " + e.getMessage());
+            }
+        }
+        return filmes;
+    }
+
+
 }
