@@ -1,7 +1,4 @@
-import br.inatel.trabalho.Locadora.DAO.AtoresDAO;
-import br.inatel.trabalho.Locadora.DAO.ClienteDao;
-import br.inatel.trabalho.Locadora.DAO.DvdDAO;
-import br.inatel.trabalho.Locadora.DAO.FilmeDAO;
+import br.inatel.trabalho.Locadora.DAO.*;
 import br.inatel.trabalho.Locadora.Models.Ator;
 import br.inatel.trabalho.Locadora.Models.Cliente;
 import br.inatel.trabalho.Locadora.Models.Dvd;
@@ -20,6 +17,7 @@ public class Main {
         ClienteDao novoCliente = new ClienteDao();
         AtoresDAO atoresdao = new AtoresDAO();
         Ator ator;
+        ParticipaDAO participa;
 
         //inicio do Menu
         while (controle) {
@@ -30,8 +28,9 @@ public class Main {
             System.out.println("2- Adicionar filme ao catálogo da Locadora");
             System.out.println("3- Gravar filme no Dvd");
             System.out.println("4- Alugar um Filme");
-            System.out.println("5- Adcionar/remover atores ");
-            System.out.println("6- Sair");
+            System.out.println("5- Adicionar/remover atores ");
+            System.out.println("6- Adicionar atores aos filmes ");
+            System.out.println("7- Sair");
 
             System.out.println("Informe a opção escolhida");
             int opcao = entradaDados.nextInt();
@@ -152,6 +151,28 @@ public class Main {
 
                     break;
                 case 6:
+                    novoFilme = new FilmeDAO();
+                    novoFilme.listarFilmes();
+
+                    atoresdao = new AtoresDAO();
+                    atoresdao.listarAtores();
+
+                    System.out.println("De acordo com a lista de atores e filmes presentes, defina qual ator fará parte de qual filme.");
+                    System.out.println("Entre com o ID do ator: ");
+                    int idAtor = entradaDados.nextInt();
+                    entradaDados.nextLine();
+
+                    System.out.println("Entre com o ID do filme: ");
+                    idFilme = entradaDados.nextInt();
+                    entradaDados.nextLine();
+
+                    participa = new ParticipaDAO();
+
+                    participa.adicionarAtorFilme(idAtor,idFilme);
+
+
+                    break;
+                case 7:
                     System.out.println("Saindo");
                     controle = false;
                     break;
