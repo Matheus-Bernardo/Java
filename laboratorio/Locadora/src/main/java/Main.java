@@ -24,7 +24,7 @@ public class Main {
 
             //menu Inicial
             System.out.println("Bem vindo a locadora");
-            System.out.println("1- Cadastrar novo Cliente");
+            System.out.println("1- Gerenciar Clientes ");
             System.out.println("2- Adicionar filme ao catálogo da Locadora");
             System.out.println("3- Gravar filme no Dvd");
             System.out.println("4- Alugar um Filme");
@@ -38,29 +38,50 @@ public class Main {
 
             switch (opcao) {
                 case 1:
-                    //dados dos clientes
-                    System.out.println("Nome do cliente:");
-                    String nome = entradaDados.nextLine();
-                    //entradaDados.nextLine();
 
-                    System.out.println("cpf do cliente:");
-                    String cpf = entradaDados.nextLine();
+                    System.out.println("1- cadastrar novo Cliente");
+                    System.out.println("2- Listar Clientes");
+                    opcao = entradaDados.nextInt();
+                    entradaDados.nextLine();
 
-                    System.out.println("endereço do cliente:");
-                    String endereco = entradaDados.nextLine();
+                    switch (opcao){
+                        case 1:
+                            //dados dos clientes
+                            System.out.println("Nome do cliente:");
+                            String nome = entradaDados.nextLine();
+                            //entradaDados.nextLine();
 
-                    System.out.println("telefone do cliente:");
-                    String telefone = entradaDados.nextLine();
+                            System.out.println("cpf do cliente:");
+                            String cpf = entradaDados.nextLine();
 
-                    System.out.println("email do cliente:");
-                    String email = entradaDados.nextLine();
+                            System.out.println("endereço do cliente:");
+                            String endereco = entradaDados.nextLine();
 
-                    //criando um cliente a ser inserido no banco
-                    Cliente cliente = new Cliente(cpf, nome, endereco, telefone, email);//cria novo cliente
+                            System.out.println("telefone do cliente:");
+                            String telefone = entradaDados.nextLine();
 
-                    //inserindo cliente no banco
-                    novoCliente = new ClienteDao();
-                    novoCliente.insertCliente(cliente);
+                            System.out.println("email do cliente:");
+                            String email = entradaDados.nextLine();
+
+                            //criando um cliente a ser inserido no banco
+                            Cliente cliente = new Cliente(cpf, nome, endereco, telefone, email);//cria novo cliente
+
+                            //inserindo cliente no banco
+
+                            novoCliente.insertCliente(cliente);
+                            break;
+
+                        case 2:
+                            System.out.println("Clientes cadastrados no sistema");
+                            novoCliente.listarCliente();
+                            break;
+
+
+                        default:
+                            System.out.println("opção Inválida");
+                            break;
+                    }
+
 
                     break;
                 case 2:
@@ -105,7 +126,7 @@ public class Main {
                 case 4:
 
                     System.out.println("Informe seu cpf:");
-                    cpf = entradaDados.nextLine();
+                    String cpf = entradaDados.nextLine();
                     filmeGravadoDvd = new DvdDAO();
                     filmeGravadoDvd.ListarFilmes();
 
