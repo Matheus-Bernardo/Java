@@ -1,6 +1,9 @@
 package br.inatel.trabalho.Locadora.DAO;
 import br.inatel.trabalho.Locadora.Models.Cliente;
+import br.inatel.trabalho.Locadora.Models.Filme;
+
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class ClienteDao extends ConnectionDAO {
     boolean sucesso = false; // sucesso para salvar no banco
@@ -43,7 +46,6 @@ public class ClienteDao extends ConnectionDAO {
         return sucesso;
     }
 
-
     //UPDATE
     public void AlugaFilme(String cpfCliente, int idDvd) {
         conectaNoBanco();
@@ -81,5 +83,33 @@ public class ClienteDao extends ConnectionDAO {
         }
     }
 
+
+    //Select
+    public ArrayList<Cliente> listarCliente() {
+        ArrayList<Cliente> clientes = new ArrayList<>();
+        conectaNoBanco();
+        String sql = "SELECT Cliente.nome FROM Locadora.Cliente";
+        try {
+            st = conexao.prepareStatement(sql);
+            rs = st.executeQuery(sql);
+            while (rs.next()) {
+                Cliente clienteAux = new Cliente(rs.getString("nome"));  // Ajuste conforme sua classe Cliente
+                clientes.add(clienteAux);
+                System.out.println(rs.getString("nome")); // imprime nome do cliente
+            }
+            sucesso = true;
+        } catch (SQLException e) {
+            System.out.println("Erro: " + e.getMessage());
+            sucesso = false;
+        } finally {
+            try {
+                conexao.close();
+                st.close();
+            } catch (SQLException e) {
+                System.out.println("Erro: " + e.getMessage());
+            }
+        }
+        return clientes;
+    }
 
 }
