@@ -25,11 +25,9 @@ public class Main {
             //menu Inicial
             System.out.println("Bem vindo a locadora");
             System.out.println("1- Gerenciar Clientes ");
-            System.out.println("2- Gerencias filmes "); // gerenciar filmes
-            System.out.println("4- Alugar um Filme");
-            System.out.println("5- Adicionar/remover atores ");
-            System.out.println("6- Adicionar atores aos filmes ");
-            System.out.println("7- Sair");
+            System.out.println("2- Gerenciar filmes ");
+            System.out.println("3- Gerenciar Atores");
+            System.out.println("4- Sair");
 
             System.out.println("Informe a opção escolhida");
             int opcao = entradaDados.nextInt();
@@ -85,6 +83,7 @@ public class Main {
                 case 2:
                     System.out.println("1- Adicionar um filme no catálogo da locadora");
                     System.out.println("2- Gravar filme no Dvd ");
+                    System.out.println("3- Alugar filme ");
                     opcao = entradaDados.nextInt();
                     entradaDados.nextLine();
 
@@ -131,31 +130,32 @@ public class Main {
 
                             break;
 
+                        case 3://alugar filme
+
+                            System.out.println("Informe seu cpf:");
+                            String cpf = entradaDados.nextLine();
+                            filmeGravadoDvd = new DvdDAO();
+                            filmeGravadoDvd.ListarFilmes();
+
+                            System.out.println("Informe o Id do dvd que irá alugar: ");
+                            int dvdId = entradaDados.nextInt();
+                            entradaDados.nextLine();
+                            novoCliente.AlugaFilme(cpf, dvdId);
+                            break;
+
                         default:
                             System.out.println("opção incorreta");
                             break;
                     }
 
-
-
-
                     break;
-                case 4:
 
-                    System.out.println("Informe seu cpf:");
-                    String cpf = entradaDados.nextLine();
-                    filmeGravadoDvd = new DvdDAO();
-                    filmeGravadoDvd.ListarFilmes();
+                case 3:
 
-                    System.out.println("Informe o Id do dvd que irá alugar: ");
-                    int dvdId = entradaDados.nextInt();
-                    entradaDados.nextLine();
-                    novoCliente.AlugaFilme(cpf, dvdId);
+                    System.out.println("1- Remover ator");
+                    System.out.println("2- Adicionar ator");
+                    System.out.println("3- Adicionar ator ao Filme");
 
-                    break;
-                case 5:
-
-                    System.out.println("1 para remover / 2 para adicionar");
                     opcao = entradaDados.nextInt();
                     entradaDados.nextLine();
 
@@ -183,34 +183,35 @@ public class Main {
                             atoresdao.inserirAtor(ator);
 
                             break;
+
+                        case 3:
+
+                            novoFilme = new FilmeDAO();
+                            novoFilme.listarFilmes();
+
+                            atoresdao = new AtoresDAO();
+                            atoresdao.listarAtores();
+
+                            System.out.println("De acordo com a lista de atores e filmes presentes, defina qual ator fará parte de qual filme.");
+                            System.out.println("Entre com o ID do ator: ");
+                            idAtor = entradaDados.nextInt();
+                            entradaDados.nextLine();
+
+                            System.out.println("Entre com o ID do filme: ");
+                            int idFilme = entradaDados.nextInt();
+                            entradaDados.nextLine();
+
+                            participa = new ParticipaDAO();
+
+                            participa.adicionarAtorFilme(idAtor,idFilme);
+
+                            break;
                         default:
                             break;
                     }
-
                     break;
-                case 6:
-                    novoFilme = new FilmeDAO();
-                    novoFilme.listarFilmes();
 
-                    atoresdao = new AtoresDAO();
-                    atoresdao.listarAtores();
-
-                    System.out.println("De acordo com a lista de atores e filmes presentes, defina qual ator fará parte de qual filme.");
-                    System.out.println("Entre com o ID do ator: ");
-                    int idAtor = entradaDados.nextInt();
-                    entradaDados.nextLine();
-
-                    System.out.println("Entre com o ID do filme: ");
-                    int idFilme = entradaDados.nextInt();
-                    entradaDados.nextLine();
-
-                    participa = new ParticipaDAO();
-
-                    participa.adicionarAtorFilme(idAtor,idFilme);
-
-
-                    break;
-                case 7:
+                case 4:
                     System.out.println("Saindo");
                     controle = false;
                     break;
