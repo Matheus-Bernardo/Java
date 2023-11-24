@@ -1,11 +1,12 @@
 package br.inatel.trabalho.Locadora.DAO;
+import br.inatel.trabalho.Locadora.Interfaces.MsgAlugaFilme;
 import br.inatel.trabalho.Locadora.Models.Cliente;
 import br.inatel.trabalho.Locadora.Models.Filme;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class ClienteDao extends ConnectionDAO {
+public class ClienteDao extends ConnectionDAO implements MsgAlugaFilme {
     boolean sucesso = false; // sucesso para salvar no banco
     //insert
     public boolean insertCliente(Cliente cliente){
@@ -69,6 +70,8 @@ public class ClienteDao extends ConnectionDAO {
             pst.executeUpdate();
 
             System.out.println("Filme alugado.");
+
+            AlugouFilme();
             sucesso = true;
         } catch (SQLException e) {
             System.out.println("Erro: " + e.getMessage());
@@ -112,4 +115,8 @@ public class ClienteDao extends ConnectionDAO {
         return clientes;
     }
 
+    @Override
+    public void AlugouFilme() {
+        System.out.println("Parabens pela Escolha, bom Filme.");
+    }
 }
