@@ -25,8 +25,7 @@ public class Main {
             //menu Inicial
             System.out.println("Bem vindo a locadora");
             System.out.println("1- Gerenciar Clientes ");
-            System.out.println("2- Adicionar filme ao catálogo da Locadora");
-            System.out.println("3- Gravar filme no Dvd");
+            System.out.println("2- Gerencias filmes "); // gerenciar filmes
             System.out.println("4- Alugar um Filme");
             System.out.println("5- Adicionar/remover atores ");
             System.out.println("6- Adicionar atores aos filmes ");
@@ -76,7 +75,6 @@ public class Main {
                             novoCliente.listarCliente();
                             break;
 
-
                         default:
                             System.out.println("opção Inválida");
                             break;
@@ -85,42 +83,61 @@ public class Main {
 
                     break;
                 case 2:
-                    //dados dos filmes
-                    System.out.println("Entre com o ID único do filme: ");
-                    int idFilme = entradaDados.nextInt();
+                    System.out.println("1- Adicionar um filme no catálogo da locadora");
+                    System.out.println("2- Gravar filme no Dvd ");
+                    opcao = entradaDados.nextInt();
                     entradaDados.nextLine();
 
-                    System.out.println("Entre com o nome do Filme:");
-                    String nomeFilme = entradaDados.nextLine();
+                    switch (opcao){
+                        case 1:
+                            //dados dos filmes
+                            System.out.println("Entre com o ID único do filme: ");
+                            int idFilme = entradaDados.nextInt();
+                            entradaDados.nextLine();
 
-                    System.out.println("Informe a data de lançamento: ");
-                    String dataLancamento = entradaDados.nextLine();
+                            System.out.println("Entre com o nome do Filme:");
+                            String nomeFilme = entradaDados.nextLine();
 
-                    //cria novo filme
-                    filme = new Filme(idFilme, nomeFilme, dataLancamento);
+                            System.out.println("Informe a data de lançamento: ");
+                            String dataLancamento = entradaDados.nextLine();
 
-                    //inserindo filme no banco
-                    novoFilme = new FilmeDAO();
-                    novoFilme.insertFilme(filme);
+                            //cria novo filme
+                            filme = new Filme(idFilme, nomeFilme, dataLancamento);
 
-
-                    break;
-                case 3:
-
-                    System.out.println("Entre com o ID único do DVD:");
-                    int idDvd = entradaDados.nextInt();
-                    entradaDados.nextLine();
-
-                    System.out.println("Entre com o ID do filme que você deseja gravar no DVD:");
-                    int idFilmeDvd = entradaDados.nextInt();
+                            //inserindo filme no banco
+                            novoFilme = new FilmeDAO();
+                            novoFilme.insertFilme(filme);
 
 
-                    //grava um novo filme no dvd
-                    Dvd novoDvd = new Dvd(idDvd, idFilmeDvd, "NULL");
+                            break;
 
-                    //insere novo Dvd no banco
-                    filmeGravadoDvd = new DvdDAO();
-                    filmeGravadoDvd.insertFilmeNoDvd(novoDvd);
+                        case 2:
+
+                            System.out.println("Entre com o ID único do DVD:");
+                            int idDvd = entradaDados.nextInt();
+                            entradaDados.nextLine();
+
+                            System.out.println("Entre com o ID do filme que você deseja gravar no DVD:");
+                            int idFilmeDvd = entradaDados.nextInt();
+
+
+                            //grava um novo filme no dvd
+                            Dvd novoDvd = new Dvd(idDvd, idFilmeDvd, "NULL");
+
+                            //insere novo Dvd no banco
+                            filmeGravadoDvd = new DvdDAO();
+                            filmeGravadoDvd.insertFilmeNoDvd(novoDvd);
+
+
+                            break;
+
+                        default:
+                            System.out.println("opção incorreta");
+                            break;
+                    }
+
+
+
 
                     break;
                 case 4:
@@ -184,7 +201,7 @@ public class Main {
                     entradaDados.nextLine();
 
                     System.out.println("Entre com o ID do filme: ");
-                    idFilme = entradaDados.nextInt();
+                    int idFilme = entradaDados.nextInt();
                     entradaDados.nextLine();
 
                     participa = new ParticipaDAO();
