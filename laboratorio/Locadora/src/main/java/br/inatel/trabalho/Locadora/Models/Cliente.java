@@ -16,6 +16,12 @@ public class Cliente {
         this.telefone = telefone;
         this.email = email;
     }
+
+    //sobreEscrita do Construtor
+    public Cliente(String nome) {
+        this.nome = nome;
+    }
+
     //getters
     public String getCpf() {return this.cpf;}
     public String getNome() {return this.nome;}
