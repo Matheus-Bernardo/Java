@@ -193,14 +193,11 @@ public class Main {
                             break;
 
                         case 2:
-                            System.out.println("Informe o id do ator: ");
-                            idAtor = entradaDados.nextInt();
-                            entradaDados.nextLine();
 
                             System.out.println("Informe o nome do Ator");
                             String nomeAtor = entradaDados.nextLine();
 
-                            ator = new Ator(idAtor,nomeAtor);
+                            ator = new Ator(nomeAtor);
                             atoresdao.inserirAtor(ator);
 
                             break;

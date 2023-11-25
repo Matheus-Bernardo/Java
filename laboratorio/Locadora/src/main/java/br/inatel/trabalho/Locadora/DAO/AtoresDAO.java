@@ -78,14 +78,13 @@ public class AtoresDAO extends ConnectionDAO{
         //abrir conexão com o banco
         conectaNoBanco();
 
-        String sql = "INSERT INTO ator(idAtor,nomeAtor) values (?,?)";
+        String sql = "INSERT INTO ator(nomeAtor) values (?)";
 
         //parametros a serem inseridos no Banco de dados
 
         try{
             pst = conexao.prepareStatement(sql);
-            pst.setInt(1, ator.getIdAtor());
-            pst.setString(2, ator.getNomeAtor());
+            pst.setString(1, ator.getNomeAtor());
 
 
             pst.execute();

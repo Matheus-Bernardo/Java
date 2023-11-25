@@ -12,6 +12,10 @@ public class Ator {
         this.nomeAtor = nomeAtor;
     }
 
+    public Ator(String nomeAtor) {
+        this.nomeAtor = nomeAtor;
+    }
+
     //getter e setters
     public int getIdAtor() {
         return idAtor;
