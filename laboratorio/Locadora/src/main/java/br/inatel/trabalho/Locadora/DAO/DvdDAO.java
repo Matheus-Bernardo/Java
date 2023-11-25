@@ -44,7 +44,7 @@ public class DvdDAO extends ConnectionDAO {
     }
 
     //listar dvds (Select)
-    public ArrayList<Dvd> ListarFilmes() {
+    public ArrayList<Dvd> ListarFilmes() {//apresenta dvds disponiveis para serem alugados
         ArrayList<Dvd> dvds = new ArrayList<>();
         conectaNoBanco();
         String sql = "SELECT Dvd.idDvd, Filme.idFilme, Filme.nome " +

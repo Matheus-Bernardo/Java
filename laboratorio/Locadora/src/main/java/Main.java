@@ -40,6 +40,8 @@ public class Main {
                     System.out.println("2- Listar Clientes");
                     System.out.println("3- remover cliente");
                     System.out.println("4- editar cliente");
+                    System.out.println("5- ver filmes alugados por cliente");
+                    System.out.println("6- Devolver filmes alugados por cliente");
 
 
                     opcao = entradaDados.nextInt();
@@ -97,6 +99,27 @@ public class Main {
                             telefone = entradaDados.nextLine();
 
                             novoCliente.AtualizaCelularCliente(cpf,telefone);
+
+
+                            break;
+                        case 5://listar filme alugado por um cliente
+                            System.out.println("Informe o cpf para consultar os filmes alugado pelo cliente: ");
+                            cpf = entradaDados.nextLine();
+                            novoCliente.listarFilmesAlugados(cpf);
+
+                            break;
+
+
+                        case 6://devolver filme
+                            System.out.println("Informe o cpf para consultar os filmes alugado pelo cliente: ");
+                            cpf = entradaDados.nextLine();
+                            novoCliente.listarFilmesAlugados(cpf);
+
+                            System.out.println("informe o id do dvd a ser devolvido");
+                            int idDvd = entradaDados.nextInt();
+                            entradaDados.nextLine();
+
+                            novoCliente.devolverFilme(cpf,idDvd);
 
 
                             break;

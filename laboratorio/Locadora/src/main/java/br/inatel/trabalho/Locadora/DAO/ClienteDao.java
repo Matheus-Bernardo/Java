@@ -183,4 +183,90 @@ public class ClienteDao extends ConnectionDAO implements MsgAlugaFilme {
         }
     }
 
+    public void listarFilmesAlugados(String cpfCliente) {
+        conectaNoBanco();
+        String sql = "SELECT c.nome AS nome_cliente, f.nome AS nome_filme, d.idDvd " +
+                "FROM dvd_alugado da " +
+                "JOIN Cliente c ON da.cpf_cliente = c.CPF " +
+                "JOIN Dvd d ON da.id_dvd = d.idDvd " +
+                "JOIN Filme f ON d.Filme_idFilme = f.idFilme " +
+                "WHERE c.CPF = ?";
+
+
+        try {
+            pst = conexao.prepareStatement(sql);
+            pst.setString(1,cpfCliente);
+            rs = pst.executeQuery();
+
+            sucesso = true;
+
+            while (rs.next()){
+                String nomeCliente = rs.getString("nome_cliente");
+                String nomeFilme = rs.getString("nome_filme");
+                int idDvd =rs.getInt("idDvd");
+                System.out.println("Cliente: " + nomeCliente + " - Filme: " + nomeFilme + " - ID do DVD: " + idDvd);
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Erro: " + e.getMessage());
+            sucesso = false;
+        } finally {
+            try {
+                conexao.close();
+                pst.close();
+            } catch (SQLException e) {
+                System.out.println("Erro: " + e.getMessage());
+            }
+        }
+
+    }
+
+    public void devolverFilme(String cpfCliente, int idDvd) {
+        conectaNoBanco();
+
+        // Atualizar o campo alugado na tabela Dvd para "sim"
+        String sqlUpdateDvd = "UPDATE Dvd SET alugado = NULL WHERE idDvd = ? AND EXISTS (SELECT * FROM dvd_alugado WHERE id_dvd = ? AND cpf_cliente = ?)";
+
+
+        try {
+            conexao.setAutoCommit(false);
+            // Atualizar o campo alugado para NULL na tabela Dvd
+            pst = conexao.prepareStatement(sqlUpdateDvd);
+            pst.setInt(1,idDvd);
+            pst.setInt(2,idDvd);
+            pst.setString(3,cpfCliente);
+
+            int linhasAfetadas = pst.executeUpdate();
+
+            //deletar a linha correspondente na tabela DVD_alugado
+            String sqlDeleteDvdAlugado = "DELETE FROM dvd_alugado WHERE id_dvd = ? AND cpf_cliente = ?";
+
+            pst = conexao.prepareStatement(sqlDeleteDvdAlugado);
+            pst.setInt(1,idDvd);
+            pst.setString(2,cpfCliente);
+
+            int linhasAfetadasDvdAlugado = pst.executeUpdate();
+
+            if (linhasAfetadas > 0 && linhasAfetadasDvdAlugado > 0) {
+                System.out.println("Filme devolvido com sucesso!");
+                conexao.commit(); // Confirma a transação
+            } else {
+                System.out.println("Erro ao devolver filme ou filme não está alugado para o cliente.");
+                conexao.rollback(); // Desfaz a transação em caso de erro
+            }
+
+            sucesso = true;
+        } catch (SQLException e) {
+            System.out.println("Erro: " + e.getMessage());
+            sucesso = false;
+        } finally {
+            try {
+                conexao.close();
+                pst.close();
+            } catch (SQLException e) {
+                System.out.println("Erro: " + e.getMessage());
+            }
+        }
+    }
+
 }
