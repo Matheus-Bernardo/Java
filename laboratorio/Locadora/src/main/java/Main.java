@@ -12,7 +12,7 @@ public class Main {
         boolean controle = true;//variavel de controle do menu
 
         Filme filme;
-        FilmeDAO novoFilme;
+        FilmeDAO novoFilme = new FilmeDAO();
         DvdDAO filmeGravadoDvd;
         ClienteDao novoCliente = new ClienteDao();
         AtoresDAO atoresdao = new AtoresDAO();
@@ -85,7 +85,6 @@ public class Main {
                             novoCliente.excluirCliente(cpf);
 
 
-
                             break;
 
                         case 4:
@@ -121,14 +120,14 @@ public class Main {
                             filme = new Filme(nomeFilme, dataLancamento);
 
                             //inserindo filme no banco
-                            novoFilme = new FilmeDAO();
+
                             novoFilme.insertFilme(filme);
 
 
                             break;
 
                         case 2:
-
+                            novoFilme.listarFilmes();
                             System.out.println("Entre com o ID do filme que você deseja gravar no DVD:");
                             int idFilmeDvd = entradaDados.nextInt();
 

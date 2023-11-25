@@ -60,7 +60,7 @@ public class DvdDAO extends ConnectionDAO {
                 Dvd dvdAux = new Dvd( rs.getInt("idDvd"),rs.getInt("idFilme"), null);  // Ajuste conforme sua classe Dvd
                 dvds.add(dvdAux);
                 System.out.println("Id do DVD: " + dvdAux.getIdDvd());
-                System.out.println("Nome do filme gravado no DVD: " + rs.getString("nome"));
+                System.out.println("Filme: " + rs.getString("nome"));
             }
             sucesso = true;
         } catch (SQLException e) {

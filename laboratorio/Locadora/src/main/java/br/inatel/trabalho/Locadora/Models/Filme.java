@@ -10,6 +10,11 @@ public class Filme {
         this.nomeFilme = nomeFilme;
         this.dataLancamento = dataLancamento;
     }
+    public Filme( int idFillme,String nomeFilme, String dataLancamento) {
+        this.nomeFilme = nomeFilme;
+        this.idFillme = idFillme;
+        this.dataLancamento = dataLancamento;
+    }
 
     //getters e setters
     public int getIdFillme() {

@@ -53,10 +53,9 @@ public class FilmeDAO extends ConnectionDAO{
             rs = st.executeQuery(sql);
             System.out.println("Lista de Filmes:");
             while (rs.next()) {
-                Filme filmeAux = new Filme(rs.getString("nome"),rs.getString("lancamento"));  // Ajuste conforme sua classe Filme
+                Filme filmeAux = new Filme(rs.getInt("idFilme"),rs.getString("nome"),rs.getString("lancamento"));  // Ajuste conforme sua classe Filme
                 filmes.add(filmeAux);
-                System.out.println("Id do Filme: " + filmeAux.getIdFillme());
-                System.out.println("Nome do Filme: " + rs.getString("nome"));
+                System.out.println("Nome do Filme: " + rs.getString("nome") + " - id:" + rs.getInt("idFilme"));
             }
             sucesso = true;
         } catch (SQLException e) {
