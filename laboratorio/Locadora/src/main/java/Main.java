@@ -88,7 +88,16 @@ public class Main {
                             break;
 
                         case 4:
-                            //alterar dados do cliente
+                            //alterar dados do cliente(telefone ou endereço)
+
+                            System.out.println("Informe seu cpf:");
+                            cpf = entradaDados.nextLine();
+
+                            System.out.println("Informe o novo telefone:: ");
+                            telefone = entradaDados.nextLine();
+
+                            novoCliente.AtualizaCelularCliente(cpf,telefone);
+
 
                             break;
 

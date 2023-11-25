@@ -8,7 +8,8 @@ import java.util.ArrayList;
 
 public class ClienteDao extends ConnectionDAO implements MsgAlugaFilme {
     boolean sucesso = false; // sucesso para salvar no banco
-    //insert
+
+    //insert(create)
     public boolean insertCliente(Cliente cliente){
 
         //abrir conexão com o banco
@@ -51,6 +52,7 @@ public class ClienteDao extends ConnectionDAO implements MsgAlugaFilme {
     public void AlugouFilme() {
         System.out.println("Parabens pela Escolha, bom Filme.");
     }
+
     //UPDATE
     public void AlugaFilme(String cpfCliente, int idDvd) {
         conectaNoBanco();
@@ -90,8 +92,7 @@ public class ClienteDao extends ConnectionDAO implements MsgAlugaFilme {
         }
     }
 
-
-    //Select
+    //Select(read)
     public ArrayList<Cliente> listarCliente() {
         ArrayList<Cliente> clientes = new ArrayList<>();
         conectaNoBanco();
@@ -119,6 +120,7 @@ public class ClienteDao extends ConnectionDAO implements MsgAlugaFilme {
         return clientes;
     }
 
+    //delete(remove)
     public void excluirCliente(String cpf) {
         conectaNoBanco();
 
@@ -148,6 +150,36 @@ public class ClienteDao extends ConnectionDAO implements MsgAlugaFilme {
                 System.out.println("Erro: " + e.getMessage());
             }
 
+        }
+    }
+
+
+    public void AtualizaCelularCliente(String cpfCliente, String celular) {
+        conectaNoBanco();
+
+        // Atualizar o campo alugado na tabela Dvd para "sim"
+        String sqlUpdateCliente = "UPDATE Locadora.Cliente SET telefone = ? WHERE CPF = ?";
+
+        try {
+            // Atualizar tabela Dvd
+            pst = conexao.prepareStatement(sqlUpdateCliente);
+            pst.setString(1, celular);
+            pst.setString(2, cpfCliente);
+            pst.executeUpdate();
+
+            System.out.println("Telefone atualizado.");
+
+            sucesso = true;
+        } catch (SQLException e) {
+            System.out.println("Erro: " + e.getMessage());
+            sucesso = false;
+        } finally {
+            try {
+                conexao.close();
+                pst.close();
+            } catch (SQLException e) {
+                System.out.println("Erro: " + e.getMessage());
+            }
         }
     }
 
