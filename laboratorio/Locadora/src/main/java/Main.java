@@ -38,6 +38,10 @@ public class Main {
 
                     System.out.println("1- cadastrar novo Cliente");
                     System.out.println("2- Listar Clientes");
+                    System.out.println("3- remover cliente");
+                    System.out.println("4- editar cliente");
+
+
                     opcao = entradaDados.nextInt();
                     entradaDados.nextLine();
 
@@ -73,6 +77,22 @@ public class Main {
                             novoCliente.listarCliente();
                             break;
 
+                        case 3:
+                            //remover cliente
+                            novoCliente.listarCliente();
+                            System.out.println("Informe o cpf do cliente que deseja excluir: ");
+                            cpf = entradaDados.nextLine();
+                            novoCliente.excluirCliente(cpf);
+
+
+
+                            break;
+
+                        case 4:
+                            //alterar dados do cliente
+
+                            break;
+
                         default:
                             System.out.println("opção Inválida");
                             break;
@@ -90,9 +110,6 @@ public class Main {
                     switch (opcao){
                         case 1:
                             //dados dos filmes
-                            System.out.println("Entre com o ID único do filme: ");
-                            int idFilme = entradaDados.nextInt();
-                            entradaDados.nextLine();
 
                             System.out.println("Entre com o nome do Filme:");
                             String nomeFilme = entradaDados.nextLine();
@@ -101,7 +118,7 @@ public class Main {
                             String dataLancamento = entradaDados.nextLine();
 
                             //cria novo filme
-                            filme = new Filme(idFilme, nomeFilme, dataLancamento);
+                            filme = new Filme(nomeFilme, dataLancamento);
 
                             //inserindo filme no banco
                             novoFilme = new FilmeDAO();
@@ -112,16 +129,12 @@ public class Main {
 
                         case 2:
 
-                            System.out.println("Entre com o ID único do DVD:");
-                            int idDvd = entradaDados.nextInt();
-                            entradaDados.nextLine();
-
                             System.out.println("Entre com o ID do filme que você deseja gravar no DVD:");
                             int idFilmeDvd = entradaDados.nextInt();
 
 
                             //grava um novo filme no dvd
-                            Dvd novoDvd = new Dvd(idDvd, idFilmeDvd, "NULL");
+                            Dvd novoDvd = new Dvd(idFilmeDvd, "NULL");
 
                             //insere novo Dvd no banco
                             filmeGravadoDvd = new DvdDAO();

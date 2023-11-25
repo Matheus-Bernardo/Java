@@ -14,20 +14,18 @@ public class DvdDAO extends ConnectionDAO {
         //abrir conexão com o banco
         conectaNoBanco();
 
-        String sql = "INSERT INTO dvd(idDvd,Filme_idFilme,alugado) values (?,?,NULL)";
+        String sql = "INSERT INTO dvd(Filme_idFilme,alugado) values (?,NULL)";
 
         //parametros a serem inseridos no Banco de dados
 
         try{
             pst = conexao.prepareStatement(sql);
-            pst.setInt(1, dvd.getIdDvd());
-            pst.setInt(2, dvd.getIdFilme());
-
+            pst.setInt(1, dvd.getIdFilme());
 
             pst.execute();
             sucesso = true;
 
-            System.out.println("Filme cadastrado no dvd " + dvd.getIdDvd() + ".");
+            System.out.println("Filme cadastrado no dvd.");
 
         }catch (SQLException exc){
             System.out.println("Erro: " + exc);
@@ -59,7 +57,7 @@ public class DvdDAO extends ConnectionDAO {
             rs = st.executeQuery(sql);
             System.out.println("Lista de DVDs disponíveis para alugar:");
             while (rs.next()) {
-                Dvd dvdAux = new Dvd(rs.getInt("idDvd"), rs.getInt("idFilme"), null);  // Ajuste conforme sua classe Dvd
+                Dvd dvdAux = new Dvd( rs.getInt("idDvd"),rs.getInt("idFilme"), null);  // Ajuste conforme sua classe Dvd
                 dvds.add(dvdAux);
                 System.out.println("Id do DVD: " + dvdAux.getIdDvd());
                 System.out.println("Nome do filme gravado no DVD: " + rs.getString("nome"));

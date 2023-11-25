@@ -1,5 +1,7 @@
 package br.inatel.trabalho.Locadora.DAO;
 
+import com.mysql.cj.jdbc.result.UpdatableResultSet;
+
 import java.sql.*;
 
 //classe responsável por realizar a conexão com o banco de dados

@@ -6,8 +6,7 @@ public class Filme {
     private String nomeFilme;
     private String dataLancamento;
 
-    public Filme(int idFillme, String nomeFilme, String dataLancamento) {
-        this.idFillme = idFillme;
+    public Filme( String nomeFilme, String dataLancamento) {
         this.nomeFilme = nomeFilme;
         this.dataLancamento = dataLancamento;
     }

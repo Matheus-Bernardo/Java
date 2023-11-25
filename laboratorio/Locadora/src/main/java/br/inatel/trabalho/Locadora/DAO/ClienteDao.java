@@ -47,6 +47,10 @@ public class ClienteDao extends ConnectionDAO implements MsgAlugaFilme {
         return sucesso;
     }
 
+    @Override
+    public void AlugouFilme() {
+        System.out.println("Parabens pela Escolha, bom Filme.");
+    }
     //UPDATE
     public void AlugaFilme(String cpfCliente, int idDvd) {
         conectaNoBanco();
@@ -54,8 +58,8 @@ public class ClienteDao extends ConnectionDAO implements MsgAlugaFilme {
         // Atualizar o campo alugado na tabela Dvd para "sim"
         String sqlUpdateDvd = "UPDATE Locadora.Dvd SET alugado = 'sim' WHERE idDvd = ?";
 
-        // Atualizar o campo Dvd_idDvd na tabela Cliente
-        String sqlUpdateCliente = "UPDATE Locadora.Cliente SET Dvd_idDvd = ? WHERE CPF = ?";
+        // Salvar cpf e dvd alugado na tabela 'dvd_alugado'
+        String sqlUpdateCliente = "INSERT INTO Locadora.dvd_alugado VALUES(?,?)";
 
         try {
             // Atualizar tabela Dvd
@@ -65,8 +69,8 @@ public class ClienteDao extends ConnectionDAO implements MsgAlugaFilme {
 
             // Atualizar tabela Cliente
             pst = conexao.prepareStatement(sqlUpdateCliente);
-            pst.setInt(1, idDvd);
-            pst.setString(2, cpfCliente);
+            pst.setString(1, cpfCliente);
+            pst.setInt(2, idDvd);
             pst.executeUpdate();
 
             System.out.println("Filme alugado.");
@@ -91,14 +95,14 @@ public class ClienteDao extends ConnectionDAO implements MsgAlugaFilme {
     public ArrayList<Cliente> listarCliente() {
         ArrayList<Cliente> clientes = new ArrayList<>();
         conectaNoBanco();
-        String sql = "SELECT Cliente.nome FROM Locadora.Cliente";
+        String sql = "SELECT Cliente.nome,Cliente.cpf FROM Locadora.Cliente";
         try {
             st = conexao.prepareStatement(sql);
             rs = st.executeQuery(sql);
             while (rs.next()) {
-                Cliente clienteAux = new Cliente(rs.getString("nome"));  // Ajuste conforme sua classe Cliente
+                Cliente clienteAux = new Cliente(rs.getString("nome"),rs.getString("cpf"));  // Ajuste conforme sua classe Cliente
                 clientes.add(clienteAux);
-                System.out.println(rs.getString("nome")); // imprime nome do cliente
+                System.out.println(rs.getString("nome")+ ", cpf: " + rs.getString("cpf")); // imprime nome do cliente
             }
             sucesso = true;
         } catch (SQLException e) {
@@ -115,8 +119,36 @@ public class ClienteDao extends ConnectionDAO implements MsgAlugaFilme {
         return clientes;
     }
 
-    @Override
-    public void AlugouFilme() {
-        System.out.println("Parabens pela Escolha, bom Filme.");
+    public void excluirCliente(String cpf) {
+        conectaNoBanco();
+
+        String sql = "DELETE FROM Locadora.Cliente WHERE CPF = ?";
+
+        try {
+            pst = conexao.prepareStatement(sql);
+            pst.setString(1, cpf);
+            int linhasAfetadas = pst.executeUpdate();
+
+            if (linhasAfetadas > 0) {
+                System.out.println("Cliente excluído com sucesso!");
+                sucesso = true;
+            } else {
+                System.out.println("Nenhum cliente encontrado com o cpf especificado.");
+                sucesso = false;
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Erro ao excluir o cliente: " + e.getMessage());
+            sucesso = false;
+        } finally {
+            try {
+                conexao.close();
+                pst.close();
+            } catch (SQLException e) {
+                System.out.println("Erro: " + e.getMessage());
+            }
+
+        }
     }
+
 }

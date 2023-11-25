@@ -18,8 +18,9 @@ public class Cliente {
     }
 
     //sobreEscrita do Construtor
-    public Cliente(String nome) {
+    public Cliente(String nome,String cpf) {
         this.nome = nome;
+        this.cpf = cpf;
     }
 
     //getters

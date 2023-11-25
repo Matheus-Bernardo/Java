@@ -13,15 +13,14 @@ public class FilmeDAO extends ConnectionDAO{
         //abrir conexão com o banco
         conectaNoBanco();
 
-        String sql = "INSERT INTO filme(idFilme,nome,lancamento) values (?,?,?)";
+        String sql = "INSERT INTO filme(nome,lancamento) values (?,?)";
 
         //parametros a serem inseridos no Banco de dados
 
         try{
             pst = conexao.prepareStatement(sql);
-            pst.setInt(1, filme.getIdFillme());
-            pst.setString(2, filme.getNomeFilme());
-            pst.setString(3, filme.getDataLancamento());
+            pst.setString(1, filme.getNomeFilme());
+            pst.setString(2, filme.getDataLancamento());
 
             pst.execute();
             sucesso = true;
@@ -54,7 +53,7 @@ public class FilmeDAO extends ConnectionDAO{
             rs = st.executeQuery(sql);
             System.out.println("Lista de Filmes:");
             while (rs.next()) {
-                Filme filmeAux = new Filme(rs.getInt("idFilme"), rs.getString("nome"),rs.getString("lancamento"));  // Ajuste conforme sua classe Filme
+                Filme filmeAux = new Filme(rs.getString("nome"),rs.getString("lancamento"));  // Ajuste conforme sua classe Filme
                 filmes.add(filmeAux);
                 System.out.println("Id do Filme: " + filmeAux.getIdFillme());
                 System.out.println("Nome do Filme: " + rs.getString("nome"));
