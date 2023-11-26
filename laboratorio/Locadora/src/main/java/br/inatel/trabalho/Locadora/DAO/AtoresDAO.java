@@ -44,10 +44,28 @@ public class AtoresDAO extends ConnectionDAO{
     public void excluirAtor(int idAtor) {
         conectaNoBanco();
 
-        String sql = "DELETE FROM Locadora.Ator WHERE idAtor = ?";
-
         try {
-            pst = conexao.prepareStatement(sql);
+            // Verificar se há registros associados na tabela Participa antes de excluir o ator
+            String sqlVerificarParticipacao = "SELECT COUNT(*) AS qtd FROM Participa WHERE Ator_idAtor = ?";
+            pst = conexao.prepareStatement(sqlVerificarParticipacao);
+            pst.setInt(1, idAtor);
+            rs = pst.executeQuery();
+
+            if (rs.next()) {
+                int quantidadeParticipacoes = rs.getInt("qtd");
+
+                if (quantidadeParticipacoes > 0) {
+                    // Se houver participações, exclua primeiro as entradas relacionadas na tabela Participa
+                    String sqlExcluirParticipacao = "DELETE FROM Participa WHERE Ator_idAtor = ?";
+                    pst = conexao.prepareStatement(sqlExcluirParticipacao);
+                    pst.setInt(1, idAtor);
+                    pst.executeUpdate();
+                }
+            }
+
+            // Em seguida, exclua o ator após remover as entradas relacionadas na Participa
+            String sqlExcluirAtor = "DELETE FROM Locadora.Ator WHERE idAtor = ?";
+            pst = conexao.prepareStatement(sqlExcluirAtor);
             pst.setInt(1, idAtor);
             int linhasAfetadas = pst.executeUpdate();
 
@@ -69,9 +87,9 @@ public class AtoresDAO extends ConnectionDAO{
             } catch (SQLException e) {
                 System.out.println("Erro: " + e.getMessage());
             }
-
         }
     }
+
 
     public boolean inserirAtor(Ator ator){
 
