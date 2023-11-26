@@ -5,8 +5,6 @@ public class Ator {
     private String nomeAtor;
 
     //construtor
-
-
     public Ator(int idAtor, String nomeAtor) {
         this.idAtor = idAtor;
         this.nomeAtor = nomeAtor;

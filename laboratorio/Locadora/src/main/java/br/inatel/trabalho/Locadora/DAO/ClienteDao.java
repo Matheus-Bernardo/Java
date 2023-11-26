@@ -11,14 +11,11 @@ public class ClienteDao extends ConnectionDAO implements MsgAlugaFilme {
 
     //insert(create)
     public boolean insertCliente(Cliente cliente){
-
         //abrir conexão com o banco
         conectaNoBanco();
-
         String sql = "INSERT INTO cliente(CPF,nome,endereco,telefone,email) values (?,?,?,?,?)";
 
         //parametros a serem inseridos no Banco de dados
-
         try{
             pst = conexao.prepareStatement(sql);
             pst.setString(1, cliente.getCpf());
@@ -44,7 +41,6 @@ public class ClienteDao extends ConnectionDAO implements MsgAlugaFilme {
                 System.out.println("Erro: "+ exc);
             }
         }
-
         return sucesso;
     }
 
@@ -123,9 +119,7 @@ public class ClienteDao extends ConnectionDAO implements MsgAlugaFilme {
     //delete(remove)
     public void excluirCliente(String cpf) {
         conectaNoBanco();
-
         String sql = "DELETE FROM Locadora.Cliente WHERE CPF = ?";
-
         try {
             pst = conexao.prepareStatement(sql);
             pst.setString(1, cpf);
@@ -149,27 +143,23 @@ public class ClienteDao extends ConnectionDAO implements MsgAlugaFilme {
             } catch (SQLException e) {
                 System.out.println("Erro: " + e.getMessage());
             }
-
         }
     }
 
 
     public void AtualizaCelularCliente(String cpfCliente, String celular) {
         conectaNoBanco();
-
         // Atualizar o campo alugado na tabela Dvd para "sim"
         String sqlUpdateCliente = "UPDATE Locadora.Cliente SET telefone = ? WHERE CPF = ?";
-
         try {
             // Atualizar tabela Dvd
             pst = conexao.prepareStatement(sqlUpdateCliente);
             pst.setString(1, celular);
             pst.setString(2, cpfCliente);
             pst.executeUpdate();
-
             System.out.println("Telefone atualizado.");
-
             sucesso = true;
+
         } catch (SQLException e) {
             System.out.println("Erro: " + e.getMessage());
             sucesso = false;
@@ -191,7 +181,6 @@ public class ClienteDao extends ConnectionDAO implements MsgAlugaFilme {
                 "JOIN Dvd d ON da.id_dvd = d.idDvd " +
                 "JOIN Filme f ON d.Filme_idFilme = f.idFilme " +
                 "WHERE c.CPF = ?";
-
 
         try {
             pst = conexao.prepareStatement(sql);
@@ -218,15 +207,12 @@ public class ClienteDao extends ConnectionDAO implements MsgAlugaFilme {
                 System.out.println("Erro: " + e.getMessage());
             }
         }
-
     }
 
     public void devolverFilme(String cpfCliente, int idDvd) {
         conectaNoBanco();
-
         // Atualizar o campo alugado na tabela Dvd para "sim"
         String sqlUpdateDvd = "UPDATE Dvd SET alugado = NULL WHERE idDvd = ? AND EXISTS (SELECT * FROM dvd_alugado WHERE id_dvd = ? AND cpf_cliente = ?)";
-
 
         try {
             conexao.setAutoCommit(false);
@@ -254,7 +240,6 @@ public class ClienteDao extends ConnectionDAO implements MsgAlugaFilme {
                 System.out.println("Erro ao devolver filme ou filme não está alugado para o cliente.");
                 conexao.rollback(); // Desfaz a transação em caso de erro
             }
-
             sucesso = true;
         } catch (SQLException e) {
             System.out.println("Erro: " + e.getMessage());

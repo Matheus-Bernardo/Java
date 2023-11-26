@@ -7,6 +7,7 @@ import java.sql.SQLException;
 
 public class ParticipaDAO extends ConnectionDAO {
 
+    //objetos
     FilmeDAO filmeDAO = new FilmeDAO();
     AtoresDAO atoresDAO = new AtoresDAO();
     boolean sucesso = false; // sucesso para salvar no banco

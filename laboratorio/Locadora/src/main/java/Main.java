@@ -11,6 +11,7 @@ public class Main {
 
         boolean controle = true;//variavel de controle do menu
 
+        //objetos necessários
         Filme filme;
         FilmeDAO novoFilme = new FilmeDAO();
         DvdDAO filmeGravadoDvd;
@@ -52,7 +53,6 @@ public class Main {
                             //dados dos clientes
                             System.out.println("Nome do cliente:");
                             String nome = entradaDados.nextLine();
-                            //entradaDados.nextLine();
 
                             System.out.println("cpf do cliente:");
                             String cpf = entradaDados.nextLine();
@@ -85,8 +85,6 @@ public class Main {
                             System.out.println("Informe o cpf do cliente que deseja excluir: ");
                             cpf = entradaDados.nextLine();
                             novoCliente.excluirCliente(cpf);
-
-
                             break;
 
                         case 4:
@@ -99,14 +97,11 @@ public class Main {
                             telefone = entradaDados.nextLine();
 
                             novoCliente.AtualizaCelularCliente(cpf,telefone);
-
-
                             break;
                         case 5://listar filme alugado por um cliente
                             System.out.println("Informe o cpf para consultar os filmes alugado pelo cliente: ");
                             cpf = entradaDados.nextLine();
                             novoCliente.listarFilmesAlugados(cpf);
-
                             break;
 
 
@@ -118,18 +113,13 @@ public class Main {
                             System.out.println("informe o id do dvd a ser devolvido");
                             int idDvd = entradaDados.nextInt();
                             entradaDados.nextLine();
-
                             novoCliente.devolverFilme(cpf,idDvd);
-
-
                             break;
 
                         default:
                             System.out.println("opção Inválida");
                             break;
                     }
-
-
                     break;
                 case 2:
                     System.out.println("1- Adicionar um filme no catálogo da locadora");
@@ -141,7 +131,6 @@ public class Main {
                     switch (opcao){
                         case 1:
                             //dados dos filmes
-
                             System.out.println("Entre com o nome do Filme:");
                             String nomeFilme = entradaDados.nextLine();
 
@@ -152,10 +141,7 @@ public class Main {
                             filme = new Filme(nomeFilme, dataLancamento);
 
                             //inserindo filme no banco
-
                             novoFilme.insertFilme(filme);
-
-
                             break;
 
                         case 2:
@@ -163,14 +149,12 @@ public class Main {
                             System.out.println("Entre com o ID do filme que você deseja gravar no DVD:");
                             int idFilmeDvd = entradaDados.nextInt();
 
-
                             //grava um novo filme no dvd
                             Dvd novoDvd = new Dvd(idFilmeDvd, "NULL");
 
                             //insere novo Dvd no banco
                             filmeGravadoDvd = new DvdDAO();
                             filmeGravadoDvd.insertFilmeNoDvd(novoDvd);
-
 
                             break;
 
@@ -194,7 +178,7 @@ public class Main {
 
                     break;
 
-                case 3:
+                case 3://manipulando Atores
 
                     System.out.println("1- Remover ator");
                     System.out.println("2- Adicionar ator");
@@ -215,8 +199,7 @@ public class Main {
                             atoresdao.excluirAtor(idAtor);
                             break;
 
-                        case 2:
-
+                        case 2://Cadastrar ator
                             System.out.println("Informe o nome do Ator");
                             String nomeAtor = entradaDados.nextLine();
 
@@ -225,8 +208,7 @@ public class Main {
 
                             break;
 
-                        case 3:
-
+                        case 3://vincular ator ao filme
                             novoFilme = new FilmeDAO();
                             novoFilme.listarFilmes();
 
@@ -251,7 +233,6 @@ public class Main {
                             break;
                     }
                     break;
-
                 case 4:
                     System.out.println("Saindo");
                     controle = false;
@@ -259,7 +240,6 @@ public class Main {
                 default:
                     System.out.println("Opção Incorreta");
                     break;
-
             }
 
         }

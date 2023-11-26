@@ -9,15 +9,15 @@ import java.util.ArrayList;
 public class DvdDAO extends ConnectionDAO {
 
     boolean sucesso = false; // sucesso para salvar no banco
+
+    //inserir filme em um dvd
     public boolean insertFilmeNoDvd(Dvd dvd){
 
         //abrir conexão com o banco
         conectaNoBanco();
-
         String sql = "INSERT INTO dvd(Filme_idFilme,alugado) values (?,NULL)";
 
         //parametros a serem inseridos no Banco de dados
-
         try{
             pst = conexao.prepareStatement(sql);
             pst.setInt(1, dvd.getIdFilme());

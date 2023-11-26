@@ -43,7 +43,6 @@ public class AtoresDAO extends ConnectionDAO{
     // Método para excluir um ator com base no ID
     public void excluirAtor(int idAtor) {
         conectaNoBanco();
-
         try {
             // Verificar se há registros associados na tabela Participa antes de excluir o ator
             String sqlVerificarParticipacao = "SELECT COUNT(*) AS qtd FROM Participa WHERE Ator_idAtor = ?";
@@ -62,7 +61,6 @@ public class AtoresDAO extends ConnectionDAO{
                     pst.executeUpdate();
                 }
             }
-
             // Em seguida, exclua o ator após remover as entradas relacionadas na Participa
             String sqlExcluirAtor = "DELETE FROM Locadora.Ator WHERE idAtor = ?";
             pst = conexao.prepareStatement(sqlExcluirAtor);

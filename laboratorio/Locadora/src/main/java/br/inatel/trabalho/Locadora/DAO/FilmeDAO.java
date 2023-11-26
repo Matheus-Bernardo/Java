@@ -7,12 +7,12 @@ import java.util.ArrayList;
 
 public class FilmeDAO extends ConnectionDAO{
     boolean sucesso = false; // sucesso para salvar no banco
-    //insert
+
+    //insert Filme
     public boolean insertFilme(Filme filme){
 
         //abrir conexão com o banco
         conectaNoBanco();
-
         String sql = "INSERT INTO filme(nome,lancamento) values (?,?)";
 
         //parametros a serem inseridos no Banco de dados
@@ -43,6 +43,7 @@ public class FilmeDAO extends ConnectionDAO{
         return sucesso;
     }
 
+    //listar filmes
     public ArrayList<Filme> listarFilmes() {
         ArrayList<Filme> filmes = new ArrayList<>();
         conectaNoBanco();
