@@ -15,8 +15,8 @@ public class Main {
             gerenciador.adicionarProjeto("projeto Homem a Lua",10.8);
             gerenciador.adicionarProjeto("teste",7.8);
             gerenciador.adicionarProjeto("teste",9.8);
-            gerenciador.adicionarProjeto("projeto Homem a Lua",10.8);
-
+            gerenciador.adicionarProjeto("projeto IA",3.8);
+            gerenciador.adicionarProjeto("carro elétrico",10.8);
 
         } catch (ValoresInvalidosExceptions e) {
             System.out.println(e.getMessage());

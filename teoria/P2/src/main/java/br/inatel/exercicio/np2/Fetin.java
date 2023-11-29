@@ -13,17 +13,17 @@ public class Fetin {
     }
 
     // Adicionar um projeto com sua nota ao mapa
-    public void adicionarProjeto(String nomeProjeto, double nota) throws ValoresInvalidosExceptions {
-
-        if (projetos.containsKey(nomeProjeto) ) {
-            throw  new ValoresInvalidosExceptions("Projeto ja existente.");
-        }else if (nota<6){
-            throw  new ValoresInvalidosExceptions("com essa nota o projeto está reprovado e nao foi acrescentado no Map.");
-        }else {
+    public boolean adicionarProjeto(String nomeProjeto, double nota) throws ValoresInvalidosExceptions {
+        if (projetos.containsKey(nomeProjeto)) {
+            System.out.println("Projeto já existente.");
+            return false;
+        } else if (nota < 6) {
+            System.out.println("Com essa nota o projeto está reprovado e não foi acrescentado no Map.");
+            return false;
+        } else {
             projetos.put(nomeProjeto, nota);
+            return true;
         }
-
-
     }
 
     // Obter a nota de um projeto específico
