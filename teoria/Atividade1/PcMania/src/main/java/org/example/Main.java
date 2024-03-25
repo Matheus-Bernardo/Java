@@ -11,8 +11,6 @@ public class Main {
     Computador pc1 = new Computador();
     Computador pc2 = new Computador();
     Computador pc3 = new Computador();
-    Computador[] pcsComprados = new Computador[10];
-
     Cliente cliente = new Cliente();
 
     //dados Pc1
@@ -53,7 +51,7 @@ public class Main {
 
 
     boolean controle = false;
-    float totalCompra=0;
+
     while (controle == false){
         int opcao;
         System.out.println("Deseja comprar qual oferta? 1 - 2 - 3 ou deseja sair(0)?");
@@ -63,30 +61,33 @@ public class Main {
         switch (opcao){
             case 1:
                 System.out.println("Parabéns, voce comprou o computador da oferta 1");
-                totalCompra = totalCompra + pc1.preco;
-                for (int i = 0; i < pcsComprados.length; i++) {
-                    if (pcsComprados[i] == null){
-                        pcsComprados[i] = pc1;
+
+                for (int i = 0; i < cliente.pcs.length; i++) {
+                    if (cliente.pcs[i] == null){
+                        cliente.pcs[i] = pc1;
+                        break;
                     }
                 }
                 break;
 
             case 2:
                 System.out.println("Parabéns, voce comprou o computador da oferta 2");
-                totalCompra = totalCompra + pc2.preco;
-                for (int i = 0; i < pcsComprados.length; i++) {
-                    if (pcsComprados[i] == null){
-                        pcsComprados[i] = pc2;
+
+                for (int i = 0; i < cliente.pcs.length; i++) {
+                    if (cliente.pcs[i] == null){
+                        cliente.pcs[i] = pc2;
+                        break;
                     }
                 }
                 break;
 
             case 3:
                 System.out.println("Parabéns, voce comprou o computador da oferta 3");
-                totalCompra = totalCompra + pc3.preco;
-                for (int i = 0; i < pcsComprados.length; i++) {
-                    if (pcsComprados[i] == null){
-                        pcsComprados[i] = pc3;
+
+                for (int i = 0; i < cliente.pcs.length; i++) {
+                    if (cliente.pcs[i] == null){
+                        cliente.pcs[i] = pc3;
+                        break;
                     }
                 }
                 break;
@@ -100,12 +101,12 @@ public class Main {
         System.out.println("Cliente: " + cliente.nome);
         System.out.println("cpf:" + cliente.cpf);
         System.out.println("Informações dos pcs adquiridos:");
-        for (int i = 0; i < pcsComprados.length ; i++) {
-            if (pcsComprados[i] != null){
-                pcsComprados[i].mostraPCConfigs();
+        for (int i = 0; i < cliente.pcs.length ; i++) {
+            if (cliente.pcs[i] != null){
+                cliente.pcs[i].mostraPCConfigs();
             }
         }
-        System.out.println("Total da compra feita:" + totalCompra);
+        System.out.println("Total da compra feita:" + cliente.calculaTotalCompra());
 
     }
 
